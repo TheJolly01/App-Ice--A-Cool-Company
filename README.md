@@ -9,3 +9,9 @@
 - push sul main dalle 9 fino alle 18
 - utilizzo camel case per variabili!
 - utilizzo commenti sintetici per funzionamento dei metodi
+
+## Membri del gruppo
+
+- Antonio Losito -> https://github.com/Yhato794
+- Nicola Caddeo  -> https://github.com/nicolacaddeo
+- Antonio Delrio -> https://github.com/TheJolly01
