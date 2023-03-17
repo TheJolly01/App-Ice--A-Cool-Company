@@ -9,8 +9,7 @@ public class ControlloDati {
     public static Scanner interi = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int i = controlloNumeri("Ciao");
-        System.out.println(i);
+
     }
 
     public static String controlloStringhe(String text) {
@@ -28,7 +27,7 @@ public class ControlloDati {
         return null;
     }
 
-    public static int controlloNumeri(String text) {
+    public static int controlloOraInizio(String text) {
         boolean errore = true;
         int i = 0;
         do {
@@ -51,6 +50,29 @@ public class ControlloDati {
         return i;
     }
 
+    public static int controlloOraFine(String text, int ora_inizio) {
+        boolean errore = true;
+        int i = 0;
+        do {
+            try {
+                System.out.println(text);
+                i = interi.nextInt();
+                errore = false;
+                if (i > ora_inizio) {
+                    errore = true;
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("ERRORE");
+                interi.nextLine();
+                errore = true;
+            } finally {
+            }
+        } while (errore);
+        return i;
+    }
+
     public static void controlloEinserimentoUtenti() {
 
         String email = controlloStringhe("Inserisci email");
@@ -58,8 +80,7 @@ public class ControlloDati {
         String query = "SELECT * From utenti WHERE email LIKE ?";
         try {
             Connection conn = ConnectionDB.createConnection("jdbc:mysql://localhost:3306/IceTime", "root", "root");
-            PreparedStatement stm = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement stm = conn.prepareStatement(query);
             stm.setString(0, email);
             ResultSet rs = stm.executeQuery(query);
             if (!rs.next()) {
@@ -82,10 +103,22 @@ public class ControlloDati {
         System.out.println("Inserisci descrizione");
         String descrizione = stringhe.nextLine();
         String dataEvento = controlloStringhe("Inserisci data Evento");
-        int ora_inizio = controlloNumeri("Inserisci ora inizio evento");
-        int ora_fine = controlloNumeri("Inserisci ora fine evento");
+        int ora_inizio = controlloOraInizio("Inserisci ora inizio evento");
+        int ora_fine = controlloOraFine("Inserisci ora fine evento", ora_inizio);
 
         PopolamentoDB.creaEvento(email, titolo, descrizione, dataEvento, ora_inizio, ora_fine);
 
+    }
+
+    public static void controlloEinserimentoToDoList() {
+        String email = controlloStringhe("Inserisci email");// QUESTO VA PRESA DALLA SESSIONE IN CORSO
+        String titolo = controlloStringhe("Inserisci titolo");
+        System.out.println("Inserisci descrizione");
+        String descrizione = stringhe.nextLine();
+        String dataEvento = controlloStringhe("Inserisci data evento"); // QUESTO VA PRESA DAL CALENDAR QUANDO L'USER
+                                                                        // CLICCA SULLA GIORNATA DA ESPANDARE
+        Boolean isChecked = false; // Questa viene data di default false, poi quando l'utente completa il "todo"
+                                   // spunterà la checkbox e questo valore passera a true per future stampe
+        PopolamentoDB.creaToDoList(email, titolo, descrizione, dataEvento, isChecked);
     }
 }
