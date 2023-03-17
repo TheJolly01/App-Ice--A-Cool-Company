@@ -46,4 +46,27 @@ public class PopolamentoDB {
             System.out.println(e);
         }
     }
+
+    
+    public static void creaToDoList(String email, String titolo, String descrizione, String dataEvento,
+            boolean checked) {
+        String query = "SELECT * From eventi;";
+        try {
+            Connection conn = ConnectionDB.createConnection("jdbc:mysql://localhost:3306/IceTime", "root", "root");
+            Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stm.executeQuery(query);
+            rs.moveToInsertRow();
+            rs.updateString("email", email);
+            rs.updateString("titolo", titolo);
+            rs.updateString("descrizione", descrizione);
+            rs.updateString("data_evento", dataEvento);
+            rs.updateBoolean("isChecked", checked);
+            rs.insertRow();
+            rs.moveToCurrentRow();
+            System.out.println("Utente creato inserito");
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

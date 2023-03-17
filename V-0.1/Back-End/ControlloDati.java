@@ -8,10 +8,6 @@ public class ControlloDati {
     public static Scanner stringhe = new Scanner(System.in);
     public static Scanner interi = new Scanner(System.in);
 
-    public static void main(String[] args) {
-
-    }
-
     public static String controlloStringhe(String text) {
         boolean b = true;
         while (b) {
