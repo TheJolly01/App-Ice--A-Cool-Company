@@ -37,6 +37,7 @@ public class AuthController {
         return "register";
     }
 
+    // metodo per gestire la registrazione sul DB
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
             BindingResult result,
@@ -56,4 +57,11 @@ public class AuthController {
         userService.saveUser(userDto);
         return "redirect:/register?success";
     }
+
+    // rotta per la landing page post login
+    @GetMapping("/calendar")
+    public String calendar() {
+        return "calendar";
+    }
+
 }
