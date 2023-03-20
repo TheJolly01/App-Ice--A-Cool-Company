@@ -16,40 +16,41 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 @EnableWebSecurity
 public class SpringSecurity {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+        @Autowired
+        private UserDetailsService userDetailsService;
 
-    @Bean
-    public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public static PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeHttpRequests(
-                        (authorize) -> authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/index").permitAll()
-                                .requestMatchers("/calendar").authenticated())
-                .formLogin(
-                        form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/calendar")
-                                .permitAll())
-                .logout(
-                        logout -> logout
-                                .logoutRequestMatcher(
-                                        new AntPathRequestMatcher("/logout"))
-                                .permitAll());
-        return http.build();
-    }
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                http.csrf().disable()
+                                .authorizeHttpRequests(
+                                                (authorize) -> authorize.requestMatchers("/register/**").permitAll()
+                                                                .requestMatchers("/index").permitAll()
+                                                                .requestMatchers("/calendar").permitAll()
+                                                                .requestMatchers("/**").permitAll())
+                                .formLogin(
+                                                form -> form
+                                                                .loginPage("/login")
+                                                                .loginProcessingUrl("/login")
+                                                                .defaultSuccessUrl("/calendar")
+                                                                .permitAll())
+                                .logout(
+                                                logout -> logout
+                                                                .logoutRequestMatcher(
+                                                                                new AntPathRequestMatcher("/logout"))
+                                                                .permitAll());
+                return http.build();
+        }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+                auth
+                                .userDetailsService(userDetailsService)
+                                .passwordEncoder(passwordEncoder());
+        }
 
 }

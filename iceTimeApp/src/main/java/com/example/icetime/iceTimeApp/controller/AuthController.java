@@ -23,7 +23,7 @@ public class AuthController {
     }
 
     // metodo per la pagina principale
-    @GetMapping("index")
+    @GetMapping("/")
     public String home() {
         return "index";
     }
@@ -55,7 +55,7 @@ public class AuthController {
         }
 
         userService.saveUser(userDto);
-        return "redirect:/register?success";
+        return "redirect:/login";
     }
 
     // metodo per gestire la rotta di login
