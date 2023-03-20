@@ -58,6 +58,12 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
+    // metodo per gestire la rotta di login
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     // rotta per la landing page post login
     @GetMapping("/calendar")
     public String calendar() {
