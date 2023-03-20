@@ -23,7 +23,7 @@ public class AuthController {
     }
 
     // metodo per la pagina principale
-    @GetMapping("index")
+    @GetMapping("/")
     public String home() {
         return "index";
     }
