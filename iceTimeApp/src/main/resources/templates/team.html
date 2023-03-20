@@ -4,16 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Sign up - IceTime</title>
+    <title>Team - IceTime</title>
     <meta name="description" content="Tieni traccia del tempo che hai!">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" id="mainNav">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html"><span
+        <div class="container"><a class="navbar-brand d-flex align-items-center" th:href="@{/}"><span
                     class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"><svg
                         xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                         viewBox="0 0 16 16" class="bi bi-calendar">
@@ -26,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Team</a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul><a class="btn btn-primary shadow" role="button" th:href="@{/login}">Accedi</a>
@@ -35,38 +36,34 @@
     </nav>
     <section class="py-5">
         <div class="container py-5">
-            <div class="row mb-4 mb-lg-5">
+            <div class="row mb-4 mb-lg-5 ">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <p class="fw-bold text-success mb-2">Sign up</p>
-                    <h2 class="fw-bold">Benvenuto</h2>
+                    <p class="fw-bold text-success mb-2">Il nostro Team</p>
+                    <h2 class="fw-bold">App Ice - A Cooler Team</h2>
+                    <p class="text-muted">Non importa il progetto, noi lo facciamo!</p>
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6 col-xl-4">
-                    <div class="card">
-                        <div class="card-body text-center d-flex flex-column align-items-center">
-                            <div class="bs-icon-xl bs-icon-circle bs-icon-primary shadow bs-icon my-4"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                                    viewBox="0 0 16 16" class="bi bi-person">
-                                    <path
-                                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z">
-                                    </path>
-                                </svg></div>
-                            <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
-                                <div class="mb-3"><input class="form-control" type="name" id="firstName"
-                                        name="firstName" th:field="*{firstName}" placeholder="Nome"></div>
-                                <div class="mb-3"><input class="form-control" type="surname" id="lastName"
-                                        name="lastName" th:field="*{lastName}" placeholder="Cognome"></div>
-                                <div class="mb-3"><input class="form-control" type="email" id="email" name="email"
-                                        th:field="*{email}" placeholder="Indirizzo e-mail"></div>
-                                <div class="mb-3"><input class="form-control" type="password" id="password"
-                                        name="password" th:field="*{password}" placeholder="Password"></div>
-                                <div class="mb-3"><button class="btn btn-primary shadow d-block w-100"
-                                        type="submit">Registrati</button></div>
-                                <p class="text-muted">Possiedi già un account?&nbsp;<a th:href="@{/login}">Log in</a>
-                                </p>
-                            </form>
-                        </div>
+            <div class="row row-cols-2 row-cols-md-3 mx-auto" style="max-width: 700px;">
+                <div class="col mb-4 animate__bounceIn">
+                    <div class="text-center"><a href="https://github.com/Yhato794"><img class="rounded mb-3 fit-cover"
+                                width="225" height="225" src="/img/team/avatarAntonioLosito.jpg"> </a>
+                        <h5 class="fw-bold mb-0"><strong>Antonio Losito</strong></h5>
+                        <p class="text-muted mb-2">Ciao</p>
+                    </div>
+                </div>
+                <div class="col mb-4 animate__bounceIn">
+                    <div class="text-center"><a href="https://github.com/nicolacaddeo"><img
+                                class="rounded mb-3 fit-cover" width="225" height="225"
+                                src="/img/team/avatarNicolaCaddeo.jpg"></a>
+                        <h5 class="fw-bold mb-0"><strong>Nicola Caddeo</strong></h5>
+                        <p class="text-muted mb-2">Salve</p>
+                    </div>
+                </div>
+                <div class="col mb-4 animate__bounceIn">
+                    <div class="text-center"><a href="https://github.com/TheJolly01"><img class="rounded mb-3 fit-cover"
+                                width="225" height="225" src="/img/team/avatarAntonioDelrio.jpg"></a>
+                        <h5 class="fw-bold mb-0"><strong>Antonio Delrio</strong></h5>
+                        <p class="text-muted mb-2">Jolly</p>
                     </div>
                 </div>
             </div>
