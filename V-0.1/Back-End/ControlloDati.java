@@ -8,6 +8,10 @@ public class ControlloDati {
     public static Scanner stringhe = new Scanner(System.in);
     public static Scanner interi = new Scanner(System.in);
 
+    public static void main(String[] args) {
+
+    }
+
     public static String controlloStringhe(String text) {
         boolean b = true;
         while (b) {
@@ -21,6 +25,18 @@ public class ControlloDati {
             }
         }
         return null;
+    }
+
+    public static Boolean isInputValid(String text) {
+        boolean errore = true;
+
+        if (text.length() == 0) {
+            errore = true;
+        } else {
+            errore = false;
+        }
+
+        return errore;
     }
 
     public static int controlloOraInizio(String text) {
@@ -69,9 +85,7 @@ public class ControlloDati {
         return i;
     }
 
-    public static void controlloEinserimentoUtenti() {
-
-        String email = controlloStringhe("Inserisci email");
+    public static void controlloEinserimentoUtenti(String email, String password, String nome, String cognome) {
 
         String query = "SELECT * From utenti WHERE email LIKE ?";
         try {
@@ -80,9 +94,9 @@ public class ControlloDati {
             stm.setString(0, email);
             ResultSet rs = stm.executeQuery(query);
             if (!rs.next()) {
-                String password = controlloStringhe("Inserisci password");
-                String nome = controlloStringhe("Inserisci Nome");
-                String cognome = controlloStringhe("Inserisci Cognome");
+                password = controlloStringhe("Inserisci password");
+                nome = controlloStringhe("Inserisci Nome");
+                cognome = controlloStringhe("Inserisci Cognome");
                 PopolamentoDB.creaUtente(email, password, nome, cognome);
             }
 
