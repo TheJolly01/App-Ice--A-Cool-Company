@@ -34,7 +34,7 @@ public class Event {
     @Column(name = "end_time", nullable = false)
     private int endTime;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
