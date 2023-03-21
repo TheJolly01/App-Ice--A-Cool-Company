@@ -4,11 +4,15 @@ import com.example.icetime.iceTimeApp.entity.Event;
 import com.example.icetime.iceTimeApp.service.EventService;
 import com.example.icetime.iceTimeApp.entity.User;
 import com.example.icetime.iceTimeApp.service.UserService;
+
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,14 +49,20 @@ public class EventController {
 
     // * salvataggio nel DB di un evento
     @PostMapping("/events/createevent")
-    public String store(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("event") Event formEvent,
+    public String store(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,
+            @AuthenticationPrincipal UserDetails userDetails,
             Model model) {
         String email = userDetails.getUsername();
         User user = userService.findUserByEmail(email);
+
+        if (bindingResult.hasErrors()) {
+            return "/events/create";
+        }
         formEvent.setUser(user);
         eventService.saveOrUpdate(formEvent);
 
         return "redirect:/calendar";
+
     }
 
 }
