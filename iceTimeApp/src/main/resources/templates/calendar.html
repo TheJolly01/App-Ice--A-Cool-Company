@@ -31,7 +31,8 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/team}">Team</a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
-                </ul><a class="btn btn-primary shadow" role="button" th:href="@{/login}">Accedi</a>
+                </ul>
+                <a th:text="${user.email}" href="#"></a>
             </div>
         </div>
     </nav>

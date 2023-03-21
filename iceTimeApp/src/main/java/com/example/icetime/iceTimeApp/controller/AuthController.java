@@ -11,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.BindingResult;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.List;
 
 @Controller
@@ -66,7 +69,10 @@ public class AuthController {
 
     // rotta per la landing page post login
     @GetMapping("/calendar")
-    public String calendar() {
+    public String calendar(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String email = userDetails.getUsername();
+        User user = userService.findUserByEmail(email);
+        model.addAttribute("user", user);
         return "calendar";
     }
 
