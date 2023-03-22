@@ -72,7 +72,7 @@ public class EventController {
         formEvent.setUser(user);
         eventService.saveOrUpdate(formEvent);
 
-        return "redirect:/calendar";
+        return "redirect:/events/index";
 
     }
 
@@ -89,13 +89,16 @@ public class EventController {
     // * UPDATE CRUD
     @PostMapping("/events/edit/{id}")
     public String update(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,
-            @PathVariable("id") Long id, Model model) {
+            @PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String email = userDetails.getUsername();
+        User user = userService.findUserByEmail(email);
 
         if (bindingResult.hasErrors()) {
             return "/events/edit";
         }
+        formEvent.setUser(user);
         eventService.saveOrUpdate(formEvent);
-        // eventRepository.save(formEvent);
+
         return "redirect:/events/index";
     }
 
