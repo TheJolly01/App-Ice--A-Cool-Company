@@ -59,6 +59,13 @@
                             <p th:text="${event.eventDate}"></p>
                             <p th:text="${event.startTime}"></p>
                             <p th:text="${event.endTime}"></p>
+                            <hr>
+
+                            <form method="post" th:action="@{'/events/delete/{id}' (id=${event.id})}">
+                                <button class="btn btn-danger" type="submit">Elimina</button>
+
+                            </form>
+
                         </div>
                     </div>
                 </div>

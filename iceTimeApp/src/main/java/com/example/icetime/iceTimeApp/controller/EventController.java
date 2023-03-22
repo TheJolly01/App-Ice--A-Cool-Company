@@ -58,7 +58,7 @@ public class EventController {
         return "/events/create";
     }
 
-    // * salvataggio nel DB di un evento
+    // * CREATE CRUD
     @PostMapping("/events/createevent")
     public String store(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,
             @AuthenticationPrincipal UserDetails userDetails,
@@ -74,6 +74,13 @@ public class EventController {
 
         return "redirect:/calendar";
 
+    }
+
+    @PostMapping("events/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        eventRepository.deleteById(id);
+
+        return "redirect:/events/index";
     }
 
 }
