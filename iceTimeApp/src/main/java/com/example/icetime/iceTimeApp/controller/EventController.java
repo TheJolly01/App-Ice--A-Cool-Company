@@ -58,7 +58,7 @@ public class EventController {
         return "/events/create";
     }
 
-    // * salvataggio nel DB di un evento
+    // * CREATE CRUD
     @PostMapping("/events/createevent")
     public String store(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,
             @AuthenticationPrincipal UserDetails userDetails,
@@ -72,8 +72,42 @@ public class EventController {
         formEvent.setUser(user);
         eventService.saveOrUpdate(formEvent);
 
-        return "redirect:/calendar";
+        return "redirect:/events/index";
 
+    }
+
+    // * GET per il form di modifica
+    @GetMapping("/events/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        Event event1 = eventService.getEventById(id);
+        Long eventId = event1.getId();
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("event", eventRepository.findById(id));
+        return "/events/edit";
+    }
+
+    // * UPDATE CRUD
+    @PostMapping("/events/edit/{id}")
+    public String update(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,
+            @PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String email = userDetails.getUsername();
+        User user = userService.findUserByEmail(email);
+
+        if (bindingResult.hasErrors()) {
+            return "/events/edit";
+        }
+        formEvent.setUser(user);
+        eventService.saveOrUpdate(formEvent);
+
+        return "redirect:/events/index";
+    }
+
+    // * DELETE CRUD
+    @PostMapping("events/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        eventRepository.deleteById(id);
+
+        return "redirect:/events/index";
     }
 
 }
