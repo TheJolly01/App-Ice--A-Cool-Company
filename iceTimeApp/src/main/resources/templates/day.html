@@ -69,15 +69,19 @@
                         <a class="btn btn-primary shadow " role="button" onclick="openFormModifica()">Modifica</a>
                     </div>
                     <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button">Elimina</a>
+                        <form method="post" th:action="@{'/events/delete/{id}' (id=${event.id})}">
+                            <button type="submit" class="btn btn-primary shadow">Elimina</button>
+                        </form>
                     </div>
+
                 </div>
             </div>
-            <div class="row"></div>
-            <div class="col-12 text-center m-auto">
-                <a class="btn btn-primary shadow" th:href="@{/events/create}">Aggiungi evento</a>
-            </div>
-            <div class="row"></div>
+        </div>
+        <div class="row"></div>
+        <div class="col-12 text-center m-auto">
+            <a class="btn btn-primary shadow" th:href="@{/events/create}">Aggiungi evento</a>
+        </div>
+        <div class="row"></div>
         </div>
         </div>
 

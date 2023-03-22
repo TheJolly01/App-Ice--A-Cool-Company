@@ -108,7 +108,7 @@ public class EventController {
     public String delete(@PathVariable("id") Long id) {
         eventRepository.deleteById(id);
 
-        return "redirect:/events/index";
+        return "redirect:/day";
     }
 
 }
