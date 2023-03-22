@@ -9,6 +9,13 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="/style.css">
+    <style>
+        #user-actions {
+            display: flex;
+            justify-content: center;
+            column-gap: 0.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -91,17 +98,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="showCalendar()">Seleziona data</a>
+                    <div id="user-actions" class="col">
+                        <div class="text-center">
+                            <a class="btn btn-primary shadow" role="button" onclick="showCalendar()">Seleziona data</a>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary shadow " role="button">Aggiungi</button>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-12 text-center m-auto">
-                        <button type="submit" class="btn btn-primary shadow " role="button">Aggiungi</button>
-                    </div>
-                </div>
-                <br>
             </form>
         </div>
         <!-- Fino a qui -->
