@@ -1,9 +1,295 @@
-/*
- * Bootstrap  v5.2.3 (https: //getbootstrap.com/)
- * Copyright 2011-2022 The Bootstrap Authors
- * Copyright 2011-2022 Twitter,  Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+.todo-check-box {
+    font-family: system-ui, sans-serif;
+    font-size: auto;
+    font-weight: bold;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.5em;
+}
+
+input[type=checkbox]:checked+label {
+    color: white;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    font-style: oblique;
+}
+
+
+input[type="checkbox"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--bs-indigo);
+    background-color: CanvasText;
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+    outline: max(2px, 0.15em) solid currentColor;
+    outline-offset: max(2px, 0.15em);
+}
+
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+
+.close-popup {
+    text-align: right;
+    background-color: transparent;
+}
+
+.form-ore {
+    width: 100%;
+    margin-bottom: 1rem;
+    vertical-align: top;
+    text-align: center;
+}
+
+
+.blur-filter {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    background-color: #343a40;
+    margin-top: 10px;
+    position: relative;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+/* Add styles to the form container */
+.form-container {
+    max-width: 70%;
+    padding: 10px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text],
+.form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus,
+.form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+    opacity: 1;
+}
+
+
+/*New calendar*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Inter:300italic, 400italic, 600italic, 700italic, 800italic, 400, 300, 600, 700, 800&display=swap);
+
+.calendar {
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    transform: translate(-50%, 0);
+    background-color: #2d2c38;
+    width: auto;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-weight: normal;
+    border-radius: 10px;
+    display: none;
+}
+
+.calendar-inner {
+    padding: 10px 10px;
+}
+
+.calendar .calendar-inner .calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.calendar .calendar-inner .calendar-body div {
+    padding: 4px;
+    min-height: 30px;
+    line-height: 30px;
+    border: 1px solid transparent;
+    margin: 10px 2px 0px;
+}
+
+.calendar .calendar-inner .calendar-body div:nth-child(-n+7) {
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--weekdays-border-bottom-color);
+}
+
+.calendar .calendar-inner .calendar-body div:nth-child(-n+7):hover {
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--weekdays-border-bottom-color);
+}
+
+.calendar .calendar-inner .calendar-body div>a {
+    color: var(--calendar-font-color);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+.calendar .calendar-inner .calendar-body div:hover {
+    border: 1px solid var(--calendar-date-hover-color);
+    border-radius: 4px;
+}
+
+.calendar .calendar-inner .calendar-body div.empty-dates:hover {
+    border: 1px solid transparent;
+}
+
+.calendar .calendar-inner .calendar-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.calendar .calendar-inner .calendar-today-date {
+    display: grid;
+    text-align: center;
+    cursor: pointer;
+    margin: 3px 0px;
+    background: var(--calendar-current-date-color);
+    padding: 8px 0px;
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+}
+
+.calendar .calendar-inner .calendar-controls .calendar-year-month {
+    display: flex;
+    min-width: 100px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.calendar .calendar-inner .calendar-controls .calendar-next {
+    text-align: right;
+}
+
+.calendar .calendar-inner .calendar-controls .calendar-year-month .calendar-year-label,
+.calendar .calendar-inner .calendar-controls .calendar-year-month .calendar-month-label {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.calendar .calendar-inner .calendar-body .calendar-today {
+    background: var(--calendar-today-color);
+    border-radius: 4px;
+}
+
+.calendar .calendar-inner .calendar-body .calendar-today:hover {
+    border: 1px solid transparent;
+}
+
+.calendar .calendar-inner .calendar-body .calendar-today a {
+    outline: 2px solid var(--calendar-today-innerborder-color);
+}
+
+.calendar .calendar-inner .calendar-controls .calendar-next a,
+.calendar .calendar-inner .calendar-controls .calendar-prev a {
+    color: var(--calendar-font-color);
+    font-family: arial, consolas, sans-serif;
+    font-size: 26px;
+    text-decoration: none;
+    padding: 4px 12px;
+    display: inline-block;
+    background: var(--calendar-nextprev-bg-color);
+    margin: 10px 0 10px 0;
+}
+
+.calendar .calendar-inner .calendar-controls .calendar-next a svg,
+.calendar .calendar-inner .calendar-controls .calendar-prev a svg {
+    height: 20px;
+    width: 20px;
+}
+
+.calendar .calendar-inner .calendar-controls .calendar-next a svg path,
+.calendar .calendar-inner .calendar-controls .calendar-prev a svg path {
+    fill: var(--next-prev-arrow-color);
+    margin-top: 50%;
+}
+
+.calendar .calendar-inner .calendar-body .prev-dates,
+.calendar .calendar-inner .calendar-body .next-dates {
+    color: var(--calendar-prevnext-date-color);
+}
+
+.calendar .calendar-inner .calendar-body .prev-dates:hover,
+.calendar .calendar-inner .calendar-body .next-dates:hover {
+    border: 1px solid transparent;
+
+    pointer-events: none;
+}
+
+/*!
+* Bootstrap  v5.2.3 (https: //getbootstrap.com/)
+* Copyright 2011-2022 The Bootstrap Authors
+* Copyright 2011-2022 Twitter,  Inc.
+* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+*/
 :root {
     --bs-blue: #3763f4;
     --bs-indigo: #6610f2;
@@ -71,6 +357,15 @@
     --bs-link-hover-color: #2c4fc3;
     --bs-code-color: #dc3dcb;
     --bs-highlight-bg: #fff3cd;
+    --weekdays-border-bottom-color: #404040;
+    --calendar-date-hover-color: #505050;
+    --calendar-current-date-color: #6610f2;
+    --calendar-today-color: #6610f2;
+    --calendar-today-innerborder-color: transparent;
+    --calendar-nextprev-bg-color: transparent;
+    --next-prev-arrow-color: #FFF;
+    --calendar-border-radius: 16px;
+    --calendar-prevnext-date-color: #484848
 }
 
 *,
@@ -84,6 +379,11 @@
         scroll-behavior: smooth;
     }
 
+}
+
+.days-background {
+    background-color: gray;
+    color: black;
 }
 
 body {
@@ -737,7 +1037,8 @@ progress {
     --bs-gutter-y: 0;
     display: flex;
     flex-wrap: wrap;
-    margin-top: calc(-1*var(--bs-gutter-y));
+    margin-top: 2%;
+    margin-bottom: 2%;
     margin-right: calc(-0.5*var(--bs-gutter-x));
     margin-left: calc(-0.5*var(--bs-gutter-x));
 }
@@ -2299,7 +2600,7 @@ progress {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.6;
-    color: #2d2c38;
+    color: white;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -2390,7 +2691,7 @@ progress {
 }
 
 @media(prefers-reduced-motion: reduce) {
-    .form-control:-webkit-file-upload-button {
+    .form-control: :-webkit-file-upload-button {
         -webkit-transition: none;
         transition: none;
     }
@@ -2761,7 +3062,7 @@ textarea.form-control-lg {
 }
 
 @media(prefers-reduced-motion: reduce) {
-    .form-range:-webkit-slider-thumb {
+    .form-range: :-webkit-slider-thumb {
         -webkit-transition: none;
         transition: none;
     }
@@ -2794,7 +3095,7 @@ textarea.form-control-lg {
 }
 
 @media(prefers-reduced-motion: reduce) {
-    .form-range:-moz-range-thumb {
+    .form-range: :-moz-range-thumb {
         -moz-transition: none;
         transition: none;
     }
@@ -5112,7 +5413,7 @@ fieldset:disabled .btn {
 }
 
 @media(prefers-reduced-motion: reduce) {
-    .accordion-button:after {
+    .accordion-button: :after {
         transition: none;
     }
 }
@@ -13045,13 +13346,6 @@ footer ul li a {
     }
 }
 
-
-
-
-
-
-
-
 .bs-icon-sm {
     --bs-icon-size: 25px;
 }
@@ -13083,93 +13377,11 @@ footer ul li a {
     border-color: var(--bs-btn-hover-border-color);
 }
 
-
-
 .text-success {
     --bs-text-opacity: 1;
     color: var(--bs-indigo) !important;
 }
 
-
-
-
-
-.clearfix::after,
-.calendar ol::after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-
-.calendar {
-    border-radius: 10px;
-}
-
-.month {
-    font-size: 2rem;
-}
-
-@media (min-width: 992px) {
-    .month {
-        font-size: 3.5rem;
-    }
-}
-
-.calendar ol li {
-    float: left;
-    width: 14.28571%;
-}
-
-.calendar .day-names {
-    border-bottom: 1px solid #eee;
-}
-
-.calendar .day-names li {
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-}
-
-.calendar .days li {
-    border-bottom: 1px solid #eee;
-    min-height: 8rem;
-}
-
-.calendar .days li .date {
-    margin: 0.5rem 0;
-}
-
-.calendar .days li .event {
-    font-size: 0.75rem;
-    padding: 0.4rem;
-    color: white;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border-radius: 4rem;
-    margin-bottom: 1px;
-}
-
-.calendar .days li .event.span-2 {
-    width: 200%;
-}
-
-.calendar .days li .event.begin {
-    border-radius: 1rem 0 0 1rem;
-}
-
-.calendar .days li .event.end {
-    border-radius: 0 1rem 1rem 0;
-}
-
-.calendar .days li:nth-child(n + 29) {
-    border-bottom: none;
-}
-
-.calendar .days li.outside .date {
-    color: #ddd;
-}
 
 .text-white {
     --bs-text-opacity: 1;

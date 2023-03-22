@@ -9,15 +9,15 @@
     prevButton: "Prev",
     nextButton: "Next",
     monthYearSeparator: " ",
-    onClickDate: function (date) {},
-    onChangeMonth: function (date) {},
-    onClickToday: function (date) {},
-    onClickMonthNext: function (date) {},
-    onClickMonthPrev: function (date) {},
-    onClickYearNext: function (date) {},
-    onClickYearPrev: function (date) {},
-    onShowYearView: function (date) {},
-    onSelectYear: function (date) {},
+    onClickDate: function (date) { },
+    onChangeMonth: function (date) { },
+    onClickToday: function (date) { },
+    onClickMonthNext: function (date) { },
+    onClickMonthPrev: function (date) { },
+    onClickYearNext: function (date) { },
+    onClickYearPrev: function (date) { },
+    onShowYearView: function (date) { },
+    onSelectYear: function (date) { },
     showThreeMonthsInARow: true,
     enableMonthChange: true,
     enableYearView: true,
@@ -28,7 +28,7 @@
     showYearDropdown: false,
     min: null,
     max: null,
-    disable: function (date) {},
+    disable: function (date) { },
     startOnMonday: false,
   };
 
@@ -578,7 +578,7 @@
 
 
 var config =
-        `function selectDate(date) {
+  `function selectDate(date) {
           $('.calendar-wrapper').updateCalendarOptions({
             date: date
           });
@@ -594,4 +594,4 @@ var config =
 
         $('.calendar-wrapper').calendar(defaultConfig);`;
 
-      eval(config);
+eval(config);

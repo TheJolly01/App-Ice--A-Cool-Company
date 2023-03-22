@@ -41,6 +41,7 @@ public class EventController {
     EventService eventService;
 
     // * INDEX CRUD
+    // ? da eliminare?
     @GetMapping("/events/index")
     public String showEventList(Model model) {
         model.addAttribute("events", eventRepository.findAll());
@@ -72,7 +73,7 @@ public class EventController {
         formEvent.setUser(user);
         eventService.saveOrUpdate(formEvent);
 
-        return "redirect:/events/index";
+        return "redirect:/day";
 
     }
 
@@ -99,7 +100,7 @@ public class EventController {
         formEvent.setUser(user);
         eventService.saveOrUpdate(formEvent);
 
-        return "redirect:/events/index";
+        return "redirect:/day";
     }
 
     // * DELETE CRUD
@@ -107,7 +108,7 @@ public class EventController {
     public String delete(@PathVariable("id") Long id) {
         eventRepository.deleteById(id);
 
-        return "redirect:/events/index";
+        return "redirect:/day";
     }
 
 }
