@@ -68,12 +68,12 @@ public class AuthController {
     }
 
     // rotta per la landing page post login
-    @GetMapping("/calendar")
+    @GetMapping("/day")
     public String calendar(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         String email = userDetails.getUsername();
         User user = userService.findUserByEmail(email);
         model.addAttribute("user", user);
-        return "calendar";
+        return "day";
     }
 
 }
