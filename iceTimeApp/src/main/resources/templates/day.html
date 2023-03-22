@@ -66,7 +66,7 @@
                     <div class="col-1 text-center m-auto border-end" th:text="${event.endTime}"></div>
                     <div class="col-4 text-center m-auto border-end" th:text="${event.eventDescription}"></div>
                     <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="openFormModifica()">Modifica</a>
+                        <a class="btn btn-primary shadow" th:href="@{'/events/edit/{id}' (id=${event.id})}">Modifica</a>
                     </div>
                     <div class="col-1 text-center m-auto">
                         <form method="post" th:action="@{'/events/delete/{id}' (id=${event.id})}">
