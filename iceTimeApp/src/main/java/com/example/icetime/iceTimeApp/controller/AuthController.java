@@ -4,6 +4,7 @@ import com.example.icetime.iceTimeApp.dto.UserDto;
 import com.example.icetime.iceTimeApp.entity.User;
 import com.example.icetime.iceTimeApp.service.UserService;
 import com.example.icetime.iceTimeApp.repository.EventRepository;
+import com.example.icetime.iceTimeApp.entity.Event;
 
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

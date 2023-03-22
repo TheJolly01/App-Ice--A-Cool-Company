@@ -13,7 +13,7 @@
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" id="mainNav">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html"><span
+        <div class="container"><a class="navbar-brand d-flex align-items-center" th:href="@{/}"><span
                     class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"><svg
                         xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                         viewBox="0 0 16 16" class="bi bi-calendar">
@@ -75,121 +75,11 @@
             </div>
             <div class="row"></div>
             <div class="col-12 text-center m-auto">
-                <a class="btn btn-primary shadow " role="button" onclick="openForm()">Aggiungi evento</a>
+                <a class="btn btn-primary shadow" th:href="@{/events/create}">Aggiungi evento</a>
             </div>
             <div class="row"></div>
         </div>
         </div>
-
-        <!-- Form per inserimento eventi -->
-        <div class="form-popup rounded-2 shadow" id="aggiungiEvento">
-            <form action="/action_page.php" class="form-container">
-                <div class="row">
-                    <div class="col-10"></div>
-                    <div class="col-2"><a class=" close-popup" role="button" onclick="closeForm()">X</a></div>
-                </div>
-
-                <h3 class="text-center m-auto">Nuovo Evento</h3>
-
-
-
-                <label for="event"></label>
-                <input class="rounded-5" type="text" placeholder="Evento" name="event" required>
-
-                <label for="descr"></label>
-                <input class="rounded-5" type="text" placeholder="Descrizione" name="descr" required>
-
-                <label for="data"></label>
-                <input id="data-scelta" class="rounded-5" type="text" placeholder="GG-MES-AAAA" name="data" required>
-
-                <div class="row">
-                    <div class="col-6">
-                        <form>
-                            <label for="startTime">Inizio:</label>
-                            <br>
-                            <input class="form-ore rounded-5" type="time" id="startTime">
-                        </form>
-                    </div>
-                    <div class="col-6">
-                        <form>
-                            <label for="endTime">Fine:</label>
-                            <br>
-                            <input class="form-ore rounded-5" type="time" id="endTime">
-                        </form>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="showCalendar()">Seleziona data</a>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-12 text-center m-auto">
-                        <button type="submit" class="btn btn-primary shadow " role="button">Aggiungi</button>
-                    </div>
-                </div>
-                <br>
-            </form>
-        </div>
-        <!-- Fino a qui -->
-
-        <!-- Form per modifica eventi -->
-        <div class="form-popup rounded-2 shadow" id="modificaEvento">
-            <form action="/action_page.php" class="form-container">
-                <div class="row">
-                    <div class="col-10"></div>
-                    <div class="col-2"><a class=" close-popup" role="button" onclick="closeFormModifica()">X</a></div>
-                </div>
-
-                <h3 class="text-center m-auto">Modifica</h3>
-
-
-
-                <label for="event"></label>
-                <input class="rounded-5" type="text" placeholder="Evento" name="event" required>
-
-                <label for="descr"></label>
-                <input class="rounded-5" type="text" placeholder="Descrizione" name="descr" required>
-
-                <label for="data"></label>
-                <input id="data-scelta-modifica" class="rounded-5" type="text" placeholder="GG-MES-AAAA" name="data"
-                    required>
-
-                <div class="row">
-                    <div class="col-6">
-                        <form>
-                            <label for="startTime">Inizio:</label>
-                            <br>
-                            <input class="form-ore rounded-5" type="time" id="startTime">
-                        </form>
-                    </div>
-                    <div class="col-6">
-                        <form>
-                            <label for="endTime">Fine:</label>
-                            <br>
-                            <input class="form-ore rounded-5" type="time" id="endTime">
-                        </form>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="showCalendar()">Seleziona data</a>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-12 text-center m-auto">
-                        <button type="submit" class="btn btn-primary shadow " role="button">Modifica</button>
-                    </div>
-                </div>
-                <br>
-            </form>
-        </div>
-        <!-- Fino a qui -->
-
 
         <!-- Calendario -->
         <div id="calendarDisplay" class="calendar">

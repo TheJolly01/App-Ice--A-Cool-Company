@@ -73,7 +73,7 @@ public class EventController {
         formEvent.setUser(user);
         eventService.saveOrUpdate(formEvent);
 
-        return "redirect:/events/index";
+        return "redirect:/day";
 
     }
 
