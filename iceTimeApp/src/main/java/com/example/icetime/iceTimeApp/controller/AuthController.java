@@ -77,7 +77,8 @@ public class AuthController {
         String email = userDetails.getUsername();
         User user = userService.findUserByEmail(email);
         model.addAttribute("user", user);
-        model.addAttribute("events", eventRepository.findAll());
+        // per visualizzare solo gli eventi dello specifico utente loggato
+        model.addAttribute("events", eventRepository.findByUser(user));
         return "day";
     }
 
