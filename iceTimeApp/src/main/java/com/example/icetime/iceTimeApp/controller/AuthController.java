@@ -3,6 +3,7 @@ package com.example.icetime.iceTimeApp.controller;
 import com.example.icetime.iceTimeApp.dto.UserDto;
 import com.example.icetime.iceTimeApp.entity.User;
 import com.example.icetime.iceTimeApp.service.UserService;
+import com.example.icetime.iceTimeApp.repository.EventRepository;
 
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,11 @@ import java.util.List;
 public class AuthController {
 
     private UserService userService;
+    private EventRepository eventRepository;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, EventRepository eventRepository) {
         this.userService = userService;
+        this.eventRepository = eventRepository;
     }
 
     // metodo per la pagina principale
@@ -73,6 +76,7 @@ public class AuthController {
         String email = userDetails.getUsername();
         User user = userService.findUserByEmail(email);
         model.addAttribute("user", user);
+        model.addAttribute("events", eventRepository.findAll());
         return "day";
     }
 

@@ -41,6 +41,7 @@ public class EventController {
     EventService eventService;
 
     // * INDEX CRUD
+    // ? da eliminare?
     @GetMapping("/events/index")
     public String showEventList(Model model) {
         model.addAttribute("events", eventRepository.findAll());

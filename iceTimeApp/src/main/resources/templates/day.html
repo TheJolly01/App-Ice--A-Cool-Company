@@ -59,12 +59,12 @@
                     <div class="col-1 text-center m-auto">
                     </div>
                 </div>
-                <div class="row border-bottom text-center m-auto py-2">
-                    <div class="col-2 text-center m-auto border-end"><b>Palestra</b></div>
-                    <div class="col-2 text-center m-auto border-end">10-Mar-2023</div>
-                    <div class="col-1 text-center m-auto border-end">12:30</div>
-                    <div class="col-1 text-center m-auto border-end">12:30</div>
-                    <div class="col-4 text-center m-auto border-end">Devo andare ad allenarmi , molto importante!</div>
+                <div class="row border-bottom text-center m-auto py-2" th:each="event : ${events}">
+                    <div class="col-2 text-center m-auto border-end"><b th:text="${event.eventTitle}"></b></div>
+                    <div class="col-2 text-center m-auto border-end" th:text="${event.eventDate}"></div>
+                    <div class="col-1 text-center m-auto border-end" th:text="${event.startTime}"></div>
+                    <div class="col-1 text-center m-auto border-end" th:text="${event.endTime}"></div>
+                    <div class="col-4 text-center m-auto border-end" th:text="${event.eventDescription}"></div>
                     <div class="col-1 text-center m-auto">
                         <a class="btn btn-primary shadow " role="button" onclick="openFormModifica()">Modifica</a>
                     </div>
@@ -72,66 +72,13 @@
                         <a class="btn btn-primary shadow " role="button">Elimina</a>
                     </div>
                 </div>
-                <div class="row border-bottom text-center m-auto py-2">
-                    <div class="col-2 text-center m-auto border-end"><b>Mangiare</b></div>
-                    <div class="col-2 text-center m-auto border-end">10-Mar-2023</div>
-                    <div class="col-1 text-center m-auto border-end">13:30</div>
-                    <div class="col-1 text-center m-auto border-end">12:30</div>
-                    <div class="col-4 text-center m-auto border-end">Ora di mangiare sano</div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="openFormModifica()">Modifica</a>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button">Elimina</a>
-                    </div>
-                </div>
-                <div class="row border-bottom text-center m-auto py-2">
-                    <div class="col-2 text-center m-auto border-end"><b>Lavoro</b></div>
-                    <div class="col-2 text-center m-auto border-end">10-Mar-2023</div>
-                    <div class="col-1 text-center m-auto border-end">15:00</div>
-                    <div class="col-1 text-center m-auto border-end">12:30</div>
-                    <div class="col-4 text-center m-auto border-end">Rinizio a lavorare</div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="openFormModifica()">Modifica</a>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button">Elimina</a>
-                    </div>
-                </div>
-                <div class="row border-bottom text-center m-auto py-2">
-                    <div class="col-2 text-center m-auto border-end"><b>Spesa</b></div>
-                    <div class="col-2 text-center m-auto border-end">10-Mar-2023</div>
-                    <div class="col-1 text-center m-auto border-end">18:30</div>
-                    <div class="col-1 text-center m-auto border-end">12:30</div>
-                    <div class="col-4 text-center m-auto border-end">Devo comprare la colazione per domani e il cibo per
-                        il mio gattino chicco</div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="openFormModifica()">Modifica</a>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button">Elimina</a>
-                    </div>
-                </div>
-                <div class="row border-bottom text-center m-auto py-2">
-                    <div class="col-2 text-center m-auto border-end"><b>Dormire</b></div>
-                    <div class="col-2 text-center m-auto border-end">10-Mar-2023</div>
-                    <div class="col-1 text-center m-auto border-end">22:30</div>
-                    <div class="col-1 text-center m-auto border-end">12:30</div>
-                    <div class="col-4 text-center m-auto border-end">Devo andare a dormire per poter essere al lavoro in
-                        tempo</div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="openFormModifica()">Modifica</a>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button">Elimina</a>
-                    </div>
-                </div>
-                <div class="row"></div>
-                <div class="col-12 text-center m-auto">
-                    <a class="btn btn-primary shadow " role="button" onclick="openForm()">Aggiungi evento</a>
-                </div>
-                <div class="row"></div>
             </div>
+            <div class="row"></div>
+            <div class="col-12 text-center m-auto">
+                <a class="btn btn-primary shadow " role="button" onclick="openForm()">Aggiungi evento</a>
+            </div>
+            <div class="row"></div>
+        </div>
         </div>
 
         <!-- Form per inserimento eventi -->
