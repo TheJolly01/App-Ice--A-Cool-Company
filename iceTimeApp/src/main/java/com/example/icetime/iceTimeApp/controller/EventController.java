@@ -2,6 +2,8 @@ package com.example.icetime.iceTimeApp.controller;
 
 import com.example.icetime.iceTimeApp.entity.Event;
 import com.example.icetime.iceTimeApp.service.EventService;
+import com.example.icetime.iceTimeApp.repository.EventRepository;
+import com.example.icetime.iceTimeApp.repository.UserRepository;
 import com.example.icetime.iceTimeApp.entity.User;
 import com.example.icetime.iceTimeApp.service.UserService;
 
@@ -28,13 +30,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class EventController {
 
     private UserService userService;
+    private EventRepository eventRepository;
 
-    public EventController(UserService userService) {
+    public EventController(UserService userService, EventRepository eventRepository) {
         this.userService = userService;
+        this.eventRepository = eventRepository;
     }
 
     @Autowired
     EventService eventService;
+
+    // * INDEX CRUD
+    @GetMapping("/events/index")
+    public String showEventList(Model model) {
+        model.addAttribute("events", eventRepository.findAll());
+        return "/events/index";
+    }
 
     // * GET per il form di creazione
     @GetMapping("/events/create")
