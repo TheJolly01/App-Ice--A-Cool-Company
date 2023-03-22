@@ -60,11 +60,13 @@
                             <p th:text="${event.startTime}"></p>
                             <p th:text="${event.endTime}"></p>
                             <hr>
-
-                            <form method="post" th:action="@{'/events/delete/{id}' (id=${event.id})}">
-                                <button class="btn btn-danger" type="submit">Elimina</button>
-
-                            </form>
+                            <div class="d-flex justify-content-between">
+                                <a class="btn btn-success"
+                                    th:href="@{'/events/edit/{id}' (id=${event.id})}">Modifica</a>
+                                <form method="post" th:action="@{'/events/delete/{id}' (id=${event.id})}">
+                                    <button class="btn btn-danger" type="submit">Elimina</button>
+                                </form>
+                            </div>
 
                         </div>
                     </div>

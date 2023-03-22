@@ -76,6 +76,30 @@ public class EventController {
 
     }
 
+    // * GET per il form di modifica
+    @GetMapping("/events/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        Event event1 = eventService.getEventById(id);
+        Long eventId = event1.getId();
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("event", eventRepository.findById(id));
+        return "/events/edit";
+    }
+
+    // * UPDATE CRUD
+    @PostMapping("/events/edit/{id}")
+    public String update(@Valid @ModelAttribute("event") Event formEvent, BindingResult bindingResult,
+            @PathVariable("id") Long id, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "/events/edit";
+        }
+        eventService.saveOrUpdate(formEvent);
+        // eventRepository.save(formEvent);
+        return "redirect:/events/index";
+    }
+
+    // * DELETE CRUD
     @PostMapping("events/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         eventRepository.deleteById(id);
