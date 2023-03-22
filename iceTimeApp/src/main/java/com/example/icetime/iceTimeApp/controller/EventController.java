@@ -40,14 +40,6 @@ public class EventController {
     @Autowired
     EventService eventService;
 
-    // * INDEX CRUD
-    // ? da eliminare?
-    @GetMapping("/events/index")
-    public String showEventList(Model model) {
-        model.addAttribute("events", eventRepository.findAll());
-        return "/events/index";
-    }
-
     // * GET per il form di creazione
     @GetMapping("/events/create")
     public String createEvent(@AuthenticationPrincipal UserDetails userDetails, Model model) {
