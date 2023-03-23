@@ -61,12 +61,17 @@
                         </div>
                     </div>
                     <div class="col-3 text-center m-auto border-end" th:text="${todo.todoDate}"></div>
-                    <div class="col-2 text-center m-auto"><a class="btn btn-primary shadow " role="button"
-                            onclick="openFormModifica()">Modifica</a></div>
-                    <div class="col-2 text-center m-auto"><a class="btn btn-primary shadow " role="button">Elimina</a>
+                    <div class="col-2 text-center m-auto">
+                        <a class="btn btn-primary shadow" th:href="@{'/todos/edit/{id}' (id=${todo.id})}">Modifica</a>
                     </div>
+                    <div class="col-2 text-center m-auto">
+                        <form method="post" th:action="@{'/todos/delete/{id}' (id=${todo.id})}">
+                            <button type="submit" class="btn btn-primary shadow " role="button">Elimina</button>
+                        </form>
+                    </div>
+
                 </div>
-                <!-- -->
+                <!-- //Todo -->
             </div>
             <div class="row"></div>
             <div class="col-12 text-center m-auto">
@@ -75,41 +80,6 @@
             <div class="row"></div>
         </div>
         </div>
-
-        <!-- Form per modifica eventi -->
-        <div class="form-popup rounded-2 shadow" id="modificaEvento">
-            <form action="/action_page.php" class="form-container">
-                <div class="row">
-                    <div class="col-10"></div>
-                    <div class="col-2"><a class=" close-popup" role="button" onclick="closeFormModifica()">X</a></div>
-                </div>
-
-                <h3 class="text-center m-auto">Modifica</h3>
-
-                <label for="descr"></label>
-                <input class="rounded-5" type="text" placeholder="Descrizione" name="descr" required>
-
-                <label for="data"></label>
-                <input id="data-scelta-modifica" class="rounded-5" type="text" placeholder="GG-MES-AAAA" name="data"
-                    required>
-
-                <div class="row">
-                    <div class="col-12 text-center m-auto">
-                        <a class="btn btn-primary shadow " role="button" onclick="showCalendar()">Seleziona data</a>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-12 text-center m-auto">
-                        <button type="submit" class="btn btn-primary shadow " role="button">Modifica</button>
-                    </div>
-                </div>
-                <br>
-            </form>
-        </div>
-        <!-- Fino a qui -->
-
-
         <!-- Calendario -->
         <div id="calendarDisplay" class="calendar">
             <a class="btn" role="button" onclick="hideCalendar()">X</a>

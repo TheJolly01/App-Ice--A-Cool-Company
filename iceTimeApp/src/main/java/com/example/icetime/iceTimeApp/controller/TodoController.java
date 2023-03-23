@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -63,6 +64,38 @@ public class TodoController {
         }
         formTodo.setUser(user);
         todoService.saveOrUpdate(formTodo);
+        return "redirect:/todos";
+    }
+
+    @GetMapping("todos/edit/{id}")
+    public String editTodo(@PathVariable("id") Long id, Model model) {
+        ToDo todo = todoService.getTodoById(id);
+        Long todoId = todo.getId();
+        model.addAttribute("todoId", todoId);
+        model.addAttribute("todo", todoRepository.findById(id));
+        return "/todos/edit";
+    }
+
+    // * UPDATE CRUD
+    @PostMapping("/todos/edit/{id}")
+    public String updateTodo(@Valid @ModelAttribute("event") ToDo formTodo, BindingResult bindingResult,
+            @PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String email = userDetails.getUsername();
+        User user = userService.findUserByEmail(email);
+
+        if (bindingResult.hasErrors()) {
+            return "/todos/edit";
+        }
+        formTodo.setUser(user);
+        todoService.saveOrUpdate(formTodo);
+
+        return "redirect:/todos";
+    }
+
+    @PostMapping("todos/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        todoRepository.deleteById(id);
+
         return "redirect:/todos";
     }
 }

@@ -11,7 +11,12 @@ public class ToDoService {
     @Autowired
     ToDoRepository toDoRepository;
 
-    // * salvare o aggiornare un evento
+    // * recuperare uno specifico todo
+    public ToDo getTodoById(Long id) {
+        return toDoRepository.findById(id).get();
+    }
+
+    // * salvare o aggiornare un todo
     public void saveOrUpdate(ToDo todo) {
         toDoRepository.save(todo);
     }
