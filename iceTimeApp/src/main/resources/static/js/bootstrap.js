@@ -4,6 +4,32 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+anime({
+  targets: '.row svg',
+  translateY: 10,
+  autoplay: true,
+  loop: true,
+  easing: 'easeInOutSine',
+  direction: 'alternate'
+});
+
+anime({
+  targets: '#zero',
+  translateX: 10,
+  autoplay: true,
+  loop: true,
+  easing: 'easeInOutSine',
+  direction: 'alternate',
+  scale: [{value: 1}, {value: 1.4}, {value: 1, delay: 250}],
+    rotateY: {value: '+=180', delay: 200},
+});
+
+
+
+
+
+
+
 var month;
 var year;
 
@@ -17,10 +43,12 @@ function closeFormModifica() {
     document.getElementById("page-blur").classList.remove("blur-filter");
 }
 
-function getActualDate(day) {
-
-    document.getElementById("data-scelta").value = day + "-" + month + "-" + year;
-    document.getElementById("data-scelta-modifica").value = day + "-" + month + "-" + year;
+function getActualDate(day){
+    if(document.getElementById("data-scelta") != null){
+    document.getElementById("data-scelta").value =day + "-" + month + "-" + year;
+        } else{
+    document.getElementById("data-scelta-modifica").value =day + "-" + month + "-" + year;
+        }
     hideCalendar();
 }
 
@@ -35,11 +63,11 @@ function closeForm() {
 }
 
 function showCalendar() {
-    document.getElementById("calendarDisplay").style.display = "block";
+  document.getElementById("calendarDisplay").style.display = "block";
 }
 
 function hideCalendar() {
-    document.getElementById("calendarDisplay").style.display = "none";
+  document.getElementById("calendarDisplay").style.display = "none";
 }
 
 
@@ -48,87 +76,88 @@ function hideCalendar() {
 function CalendarControl() {
     const calendar = new Date();
     const calendarControl = {
-        localDate: new Date(),
-        prevMonthLastDate: null,
-        calWeekDays: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
-        calMonthName: [
-            "Gen",
-            "Feb",
-            "Mar",
-            "Apr",
-            "Mag",
-            "Giu",
-            "Lug",
-            "Ago",
-            "Set",
-            "Ott",
-            "Nov",
-            "Dic"
-        ],
-        daysInMonth: function (month, year) {
-            return new Date(year, month, 0).getDate();
-        },
-        firstDay: function () {
-            return new Date(calendar.getFullYear(), calendar.getMonth(), 1);
-        },
-        lastDay: function () {
-            return new Date(calendar.getFullYear(), calendar.getMonth() + 1, 0);
-        },
-        firstDayNumber: function () {
-            return calendarControl.firstDay().getDay() + 1;
-        },
-        lastDayNumber: function () {
-            return calendarControl.lastDay().getDay() + 1;
-        },
-        getPreviousMonthLastDate: function () {
-            let lastDate = new Date(
-                calendar.getFullYear(),
-                calendar.getMonth(),
-                0
-            ).getDate();
-            return lastDate;
-        },
-        navigateToPreviousMonth: function () {
-            calendar.setMonth(calendar.getMonth() - 1);
-            calendarControl.attachEventsOnNextPrev();
-        },
-        navigateToNextMonth: function () {
-            calendar.setMonth(calendar.getMonth() + 1);
-            calendarControl.attachEventsOnNextPrev();
-        },
-        navigateToCurrentMonth: function () {
-            let currentMonth = calendarControl.localDate.getMonth();
-            let currentYear = calendarControl.localDate.getFullYear();
-            calendar.setMonth(currentMonth);
-            calendar.setYear(currentYear);
-            calendarControl.attachEventsOnNextPrev();
-        },
-        displayYear: function () {
-            let yearLabel = document.querySelector(".calendar .calendar-year-label");
-            yearLabel.innerHTML = calendar.getFullYear();
-
-            year = calendar.getFullYear();
-        },
-        displayMonth: function () {
-            let monthLabel = document.querySelector(
-                ".calendar .calendar-month-label"
-            );
-            monthLabel.innerHTML = calendarControl.calMonthName[calendar.getMonth()];
-            monthLabel = calendarControl.calMonthName[calendar.getMonth()];
-
-            month = calendarControl.calMonthName[calendar.getMonth()];
-
-        },
-        selectDate: function (e) {
-            console.log(
-                `${e.target.textContent} ${calendarControl.calMonthName[calendar.getMonth()]
-                } ${calendar.getFullYear()}`
-            );
-        },
-        plotSelectors: function () {
-            document.querySelector(
-                ".calendar"
-            ).innerHTML += `<div class="calendar-inner"><div class="calendar-controls">
+      localDate: new Date(),
+      prevMonthLastDate: null,
+      calWeekDays: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+      calMonthName: [
+        "Gen",
+        "Feb",
+        "Mar",
+        "Apr",
+        "Mag",
+        "Giu",
+        "Lug",
+        "Ago",
+        "Set",
+        "Ott",
+        "Nov",
+        "Dic"
+      ],
+      daysInMonth: function (month, year) {
+        return new Date(year, month, 0).getDate();
+      },
+      firstDay: function () {
+        return new Date(calendar.getFullYear(), calendar.getMonth(), 1);
+      },
+      lastDay: function () {
+        return new Date(calendar.getFullYear(), calendar.getMonth() + 1, 0);
+      },
+      firstDayNumber: function () {
+        return calendarControl.firstDay().getDay() + 1;
+      },
+      lastDayNumber: function () {
+        return calendarControl.lastDay().getDay() + 1;
+      },
+      getPreviousMonthLastDate: function () {
+        let lastDate = new Date(
+          calendar.getFullYear(),
+          calendar.getMonth(),
+          0
+        ).getDate();
+        return lastDate;
+      },
+      navigateToPreviousMonth: function () {
+        calendar.setMonth(calendar.getMonth() - 1);
+        calendarControl.attachEventsOnNextPrev();
+      },
+      navigateToNextMonth: function () {
+        calendar.setMonth(calendar.getMonth() + 1);
+        calendarControl.attachEventsOnNextPrev();
+      },
+      navigateToCurrentMonth: function () {
+        let currentMonth = calendarControl.localDate.getMonth();
+        let currentYear = calendarControl.localDate.getFullYear();
+        calendar.setMonth(currentMonth);
+        calendar.setYear(currentYear);
+        calendarControl.attachEventsOnNextPrev();
+      },
+      displayYear: function () {
+        let yearLabel = document.querySelector(".calendar .calendar-year-label");
+        yearLabel.innerHTML = calendar.getFullYear();
+          
+          year = calendar.getFullYear();
+      },
+      displayMonth: function () {
+        let monthLabel = document.querySelector(
+          ".calendar .calendar-month-label"
+        );
+        monthLabel.innerHTML = calendarControl.calMonthName[calendar.getMonth()];
+        monthLabel = calendarControl.calMonthName[calendar.getMonth()];
+        
+          month = calendarControl.calMonthName[calendar.getMonth()];
+          
+      },
+      selectDate: function (e) {
+        console.log(
+          `${e.target.textContent} ${
+            calendarControl.calMonthName[calendar.getMonth()]
+          } ${calendar.getFullYear()}`
+        );
+      },
+      plotSelectors: function () {
+        document.querySelector(
+          ".calendar"
+        ).innerHTML += `<div class="calendar-inner"><div class="calendar-controls">
           <div class="calendar-prev"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><path fill="#666" d="M88.2 3.8L35.8 56.23 28 64l7.8 7.78 52.4 52.4 9.78-7.76L45.58 64l52.4-52.4z"/></svg></a></div>
           <div class="calendar-year-month">
           <div id="this-month" class="calendar-month-label"></div>
@@ -144,133 +173,133 @@ function CalendarControl() {
             ${calendarControl.localDate.getFullYear()}
           </div>
           <div class="calendar-body"></div></div>`;
-        },
-        plotDayNames: function () {
-            for (let i = 0; i < calendarControl.calWeekDays.length; i++) {
-                document.querySelector(
-                    ".calendar .calendar-body"
-                ).innerHTML += `<div>${calendarControl.calWeekDays[i]}</div>`;
-            }
-        },
-        plotDates: function () {
-            document.querySelector(".calendar .calendar-body").innerHTML = "";
-            calendarControl.plotDayNames();
-            calendarControl.displayMonth();
-            calendarControl.displayYear();
-            let count = 1;
-            let prevDateCount = 0;
-
-            calendarControl.prevMonthLastDate = calendarControl.getPreviousMonthLastDate();
-            let prevMonthDatesArray = [];
-            let calendarDays = calendarControl.daysInMonth(
-                calendar.getMonth() + 1,
-                calendar.getFullYear()
-            );
-            // dates of current month
-            for (let i = 1; i < calendarDays; i++) {
-                if (i < calendarControl.firstDayNumber()) {
-                    prevDateCount += 1;
-                    document.querySelector(
-                        ".calendar .calendar-body"
-                    ).innerHTML += `<div class="prev-dates"></div>`;
-                    prevMonthDatesArray.push(calendarControl.prevMonthLastDate--);
-                } else {
-                    document.querySelector(
-                        ".calendar .calendar-body"
-                    ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" onclick = "getActualDate(${count})" href="#">${count++}</a></div>`;
-                }
-            }
-            //remaining dates after month dates
-            for (let j = 0; j < prevDateCount + 1; j++) {
-                document.querySelector(
-                    ".calendar .calendar-body"
-                ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="#">${count++}</a></div>`;
-            }
-            calendarControl.highlightToday();
-            calendarControl.plotPrevMonthDates(prevMonthDatesArray);
-            calendarControl.plotNextMonthDates();
-        },
-        attachEvents: function () {
-            let prevBtn = document.querySelector(".calendar .calendar-prev a");
-            let nextBtn = document.querySelector(".calendar .calendar-next a");
-            let todayDate = document.querySelector(".calendar .calendar-today-date");
-            let dateNumber = document.querySelectorAll(".calendar .dateNumber");
-            prevBtn.addEventListener(
-                "click",
-                calendarControl.navigateToPreviousMonth
-            );
-            nextBtn.addEventListener("click", calendarControl.navigateToNextMonth);
-            todayDate.addEventListener(
-                "click",
-                calendarControl.navigateToCurrentMonth
-            );
-            for (var i = 0; i < dateNumber.length; i++) {
-                dateNumber[i].addEventListener(
-                    "click",
-                    calendarControl.selectDate,
-                    false
-                );
-            }
-        },
-        highlightToday: function () {
-            let currentMonth = calendarControl.localDate.getMonth() + 1;
-            let changedMonth = calendar.getMonth() + 1;
-            let currentYear = calendarControl.localDate.getFullYear();
-            let changedYear = calendar.getFullYear();
-            if (
-                currentYear === changedYear &&
-                currentMonth === changedMonth &&
-                document.querySelectorAll(".number-item")
-            ) {
-                document
-                    .querySelectorAll(".number-item")
-                [calendar.getDate() - 1].classList.add("calendar-today");
-            }
-        },
-        plotPrevMonthDates: function (dates) {
-            dates.reverse();
-            for (let i = 0; i < dates.length; i++) {
-                if (document.querySelectorAll(".prev-dates")) {
-                    document.querySelectorAll(".prev-dates")[i].textContent = dates[i];
-                }
-            }
-        },
-        plotNextMonthDates: function () {
-            let childElemCount = document.querySelector('.calendar-body').childElementCount;
-            //7 lines
-            if (childElemCount > 42) {
-                let diff = 49 - childElemCount;
-                calendarControl.loopThroughNextDays(diff);
-            }
-
-            //6 lines
-            if (childElemCount > 35 && childElemCount <= 42) {
-                let diff = 42 - childElemCount;
-                calendarControl.loopThroughNextDays(42 - childElemCount);
-            }
-
-        },
-        loopThroughNextDays: function (count) {
-            if (count > 0) {
-                for (let i = 1; i <= count; i++) {
-                    document.querySelector('.calendar-body').innerHTML += `<div class="next-dates">${i}</div>`;
-                }
-            }
-        },
-        attachEventsOnNextPrev: function () {
-            calendarControl.plotDates();
-            calendarControl.attachEvents();
-        },
-        init: function () {
-            calendarControl.plotSelectors();
-            calendarControl.plotDates();
-            calendarControl.attachEvents();
+      },
+      plotDayNames: function () {
+        for (let i = 0; i < calendarControl.calWeekDays.length; i++) {
+          document.querySelector(
+            ".calendar .calendar-body"
+          ).innerHTML += `<div>${calendarControl.calWeekDays[i]}</div>`;
         }
+      },
+      plotDates: function () {
+        document.querySelector(".calendar .calendar-body").innerHTML = "";
+        calendarControl.plotDayNames();
+        calendarControl.displayMonth();
+        calendarControl.displayYear();
+        let count = 1;
+        let prevDateCount = 0;
+  
+        calendarControl.prevMonthLastDate = calendarControl.getPreviousMonthLastDate();
+        let prevMonthDatesArray = [];
+        let calendarDays = calendarControl.daysInMonth(
+          calendar.getMonth() + 1,
+          calendar.getFullYear()
+        );
+        // dates of current month
+        for (let i = 1; i < calendarDays; i++) {
+          if (i < calendarControl.firstDayNumber()) {
+            prevDateCount += 1;
+            document.querySelector(
+              ".calendar .calendar-body"
+            ).innerHTML += `<div class="prev-dates"></div>`;
+            prevMonthDatesArray.push(calendarControl.prevMonthLastDate--);
+          } else {
+            document.querySelector(
+              ".calendar .calendar-body"
+            ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" onclick = "getActualDate(${count})" href="#">${count++}</a></div>`;
+          }
+        }
+        //remaining dates after month dates
+        for (let j = 0; j < prevDateCount + 1; j++) {
+          document.querySelector(
+            ".calendar .calendar-body"
+          ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="#">${count++}</a></div>`;
+        }
+        calendarControl.highlightToday();
+        calendarControl.plotPrevMonthDates(prevMonthDatesArray);
+        calendarControl.plotNextMonthDates();
+      },
+      attachEvents: function () {
+        let prevBtn = document.querySelector(".calendar .calendar-prev a");
+        let nextBtn = document.querySelector(".calendar .calendar-next a");
+        let todayDate = document.querySelector(".calendar .calendar-today-date");
+        let dateNumber = document.querySelectorAll(".calendar .dateNumber");
+        prevBtn.addEventListener(
+          "click",
+          calendarControl.navigateToPreviousMonth
+        );
+        nextBtn.addEventListener("click", calendarControl.navigateToNextMonth);
+        todayDate.addEventListener(
+          "click",
+          calendarControl.navigateToCurrentMonth
+        );
+        for (var i = 0; i < dateNumber.length; i++) {
+            dateNumber[i].addEventListener(
+              "click",
+              calendarControl.selectDate,
+              false
+            );
+        }
+      },
+      highlightToday: function () {
+        let currentMonth = calendarControl.localDate.getMonth() + 1;
+        let changedMonth = calendar.getMonth() + 1;
+        let currentYear = calendarControl.localDate.getFullYear();
+        let changedYear = calendar.getFullYear();
+        if (
+          currentYear === changedYear &&
+          currentMonth === changedMonth &&
+          document.querySelectorAll(".number-item")
+        ) {
+          document
+            .querySelectorAll(".number-item")
+            [calendar.getDate() - 1].classList.add("calendar-today");
+        }
+      },
+      plotPrevMonthDates: function(dates){
+        dates.reverse();
+        for(let i=0;i<dates.length;i++) {
+            if(document.querySelectorAll(".prev-dates")) {
+                document.querySelectorAll(".prev-dates")[i].textContent = dates[i];
+            }
+        }
+      },
+      plotNextMonthDates: function(){
+       let childElemCount = document.querySelector('.calendar-body').childElementCount;
+       //7 lines
+       if(childElemCount > 42 ) {
+           let diff = 49 - childElemCount;
+           calendarControl.loopThroughNextDays(diff);
+       }
+
+       //6 lines
+       if(childElemCount > 35 && childElemCount <= 42 ) {
+        let diff = 42 - childElemCount;
+        calendarControl.loopThroughNextDays(42 - childElemCount);
+       }
+
+      },
+      loopThroughNextDays: function(count) {
+        if(count > 0) {
+            for(let i=1;i<=count;i++) {
+                document.querySelector('.calendar-body').innerHTML += `<div class="next-dates">${i}</div>`;
+            }
+        }
+      },
+      attachEventsOnNextPrev: function () {
+        calendarControl.plotDates();
+        calendarControl.attachEvents();
+      },
+      init: function () {
+        calendarControl.plotSelectors();
+        calendarControl.plotDates();
+        calendarControl.attachEvents();
+      }
     };
     calendarControl.init();
-}
-
-const calendarControl = new CalendarControl();
+  }
+  
+  const calendarControl = new CalendarControl();
 
 !(function (t, e) {
     "object" == typeof exports && "undefined" != typeof module ? (module.exports = e()) : "function" == typeof define && define.amd ? define(e) : ((t = "undefined" != typeof globalThis ? globalThis : t || self).bootstrap = e());
@@ -320,7 +349,7 @@ const calendarControl = new CalendarControl();
             }
             return t instanceof ShadowRoot ? t : t.parentNode ? c(t.parentNode) : null;
         },
-        h = () => { },
+        h = () => {},
         d = (t) => {
             t.offsetHeight;
         },
@@ -339,10 +368,10 @@ const calendarControl = new CalendarControl();
             }),
                 "loading" === document.readyState
                     ? (f.length ||
-                        document.addEventListener("DOMContentLoaded", () => {
-                            for (const t of f) t();
-                        }),
-                        f.push(e))
+                          document.addEventListener("DOMContentLoaded", () => {
+                              for (const t of f) t();
+                          }),
+                      f.push(e))
                     : e();
         },
         m = (t) => {
@@ -459,16 +488,16 @@ const calendarControl = new CalendarControl();
         const d = O(r, e.replace(v, "")),
             u = o
                 ? (function (t, e, i) {
-                    return function n(s) {
-                        const o = t.querySelectorAll(e);
-                        for (let { target: r } = s; r && r !== this; r = r.parentNode) for (const a of o) if (a === r) return j(s, { delegateTarget: r }), n.oneOff && P.off(t, s.type, e, i), i.apply(r, [s]);
-                    };
-                })(t, i, r)
+                      return function n(s) {
+                          const o = t.querySelectorAll(e);
+                          for (let { target: r } = s; r && r !== this; r = r.parentNode) for (const a of o) if (a === r) return j(s, { delegateTarget: r }), n.oneOff && P.off(t, s.type, e, i), i.apply(r, [s]);
+                      };
+                  })(t, i, r)
                 : (function (t, e) {
-                    return function i(n) {
-                        return j(n, { delegateTarget: t }), i.oneOff && P.off(t, n.type, e), e.apply(t, [n]);
-                    };
-                })(t, r);
+                      return function i(n) {
+                          return j(n, { delegateTarget: t }), i.oneOff && P.off(t, n.type, e), e.apply(t, [n]);
+                      };
+                  })(t, r);
         (u.delegationSelector = o ? i : null), (u.callable = r), (u.oneOff = s), (u.uidEvent = d), (c[d] = u), t.addEventListener(a, u, o);
     }
     function S(t, e, i, n, s) {
@@ -610,11 +639,11 @@ const calendarControl = new CalendarControl();
                     a = o(r)
                         ? "element"
                         : null == (i = r)
-                            ? `${i}`
-                            : Object.prototype.toString
-                                .call(i)
-                                .match(/\s([a-z]+)/i)[1]
-                                .toLowerCase();
+                        ? `${i}`
+                        : Object.prototype.toString
+                              .call(i)
+                              .match(/\s([a-z]+)/i)[1]
+                              .toLowerCase();
                 if (!new RegExp(s).test(a)) throw new TypeError(`${this.constructor.NAME.toUpperCase()}: Option "${n}" provided type "${a}" but expected type "${s}".`);
             }
             var i;
@@ -708,36 +737,36 @@ const calendarControl = new CalendarControl();
     }),
         g(K);
     const Q = {
-        find: (t, e = document.documentElement) => [].concat(...Element.prototype.querySelectorAll.call(e, t)),
-        findOne: (t, e = document.documentElement) => Element.prototype.querySelector.call(e, t),
-        children: (t, e) => [].concat(...t.children).filter((t) => t.matches(e)),
-        parents(t, e) {
-            const i = [];
-            let n = t.parentNode.closest(e);
-            for (; n;) i.push(n), (n = n.parentNode.closest(e));
-            return i;
+            find: (t, e = document.documentElement) => [].concat(...Element.prototype.querySelectorAll.call(e, t)),
+            findOne: (t, e = document.documentElement) => Element.prototype.querySelector.call(e, t),
+            children: (t, e) => [].concat(...t.children).filter((t) => t.matches(e)),
+            parents(t, e) {
+                const i = [];
+                let n = t.parentNode.closest(e);
+                for (; n; ) i.push(n), (n = n.parentNode.closest(e));
+                return i;
+            },
+            prev(t, e) {
+                let i = t.previousElementSibling;
+                for (; i; ) {
+                    if (i.matches(e)) return [i];
+                    i = i.previousElementSibling;
+                }
+                return [];
+            },
+            next(t, e) {
+                let i = t.nextElementSibling;
+                for (; i; ) {
+                    if (i.matches(e)) return [i];
+                    i = i.nextElementSibling;
+                }
+                return [];
+            },
+            focusableChildren(t) {
+                const e = ["a", "button", "input", "textarea", "select", "details", "[tabindex]", '[contenteditable="true"]'].map((t) => `${t}:not([tabindex^="-"])`).join(",");
+                return this.find(e, t).filter((t) => !l(t) && a(t));
+            },
         },
-        prev(t, e) {
-            let i = t.previousElementSibling;
-            for (; i;) {
-                if (i.matches(e)) return [i];
-                i = i.previousElementSibling;
-            }
-            return [];
-        },
-        next(t, e) {
-            let i = t.nextElementSibling;
-            for (; i;) {
-                if (i.matches(e)) return [i];
-                i = i.nextElementSibling;
-            }
-            return [];
-        },
-        focusableChildren(t) {
-            const e = ["a", "button", "input", "textarea", "select", "details", "[tabindex]", '[contenteditable="true"]'].map((t) => `${t}:not([tabindex^="-"])`).join(",");
-            return this.find(e, t).filter((t) => !l(t) && a(t));
-        },
-    },
         X = { endCallback: null, leftCallback: null, rightCallback: null },
         Y = { endCallback: "(function|null)", leftCallback: "(function|null)", rightCallback: "(function|null)" };
     class U extends F {
@@ -991,7 +1020,7 @@ const calendarControl = new CalendarControl();
                     (t = this._getFirstLevelChildren(".collapse.show, .collapse.collapsing")
                         .filter((t) => t !== this._element)
                         .map((t) => pt.getOrCreateInstance(t, { toggle: !1 }))),
-                    t.length && t[0]._isTransitioning)
+                t.length && t[0]._isTransitioning)
             )
                 return;
             if (P.trigger(this._element, "show.bs.collapse").defaultPrevented) return;
@@ -1133,10 +1162,10 @@ const calendarControl = new CalendarControl();
                 zt(s) &&
                     Wt(s) &&
                     (Object.assign(s.style, i),
-                        Object.keys(n).forEach(function (t) {
-                            var e = n[t];
-                            !1 === e ? s.removeAttribute(t) : s.setAttribute(t, !0 === e ? "" : e);
-                        }));
+                    Object.keys(n).forEach(function (t) {
+                        var e = n[t];
+                        !1 === e ? s.removeAttribute(t) : s.setAttribute(t, !0 === e ? "" : e);
+                    }));
             });
         },
         effect: function (t) {
@@ -1156,9 +1185,9 @@ const calendarControl = new CalendarControl();
                         zt(n) &&
                             Wt(n) &&
                             (Object.assign(n.style, o),
-                                Object.keys(s).forEach(function (t) {
-                                    n.removeAttribute(t);
-                                }));
+                            Object.keys(s).forEach(function (t) {
+                                n.removeAttribute(t);
+                            }));
                     });
                 }
             );
@@ -1175,10 +1204,10 @@ const calendarControl = new CalendarControl();
         var t = navigator.userAgentData;
         return null != t && t.brands
             ? t.brands
-                .map(function (t) {
-                    return t.brand + "/" + t.version;
-                })
-                .join(" ")
+                  .map(function (t) {
+                      return t.brand + "/" + t.version;
+                  })
+                  .join(" ")
             : navigator.userAgent;
     }
     function Ut() {
@@ -1232,30 +1261,30 @@ const calendarControl = new CalendarControl();
         return zt(t) && "fixed" !== te(t).position ? t.offsetParent : null;
     }
     function oe(t) {
-        for (var e = Bt(t), i = se(t); i && ee(i) && "static" === te(i).position;) i = se(i);
+        for (var e = Bt(t), i = se(t); i && ee(i) && "static" === te(i).position; ) i = se(i);
         return i && ("html" === Wt(i) || ("body" === Wt(i) && "static" === te(i).position))
             ? e
             : i ||
-            (function (t) {
-                var e = /firefox/i.test(Yt());
-                if (/Trident/i.test(Yt()) && zt(t) && "fixed" === te(t).position) return null;
-                var i = ne(t);
-                for (qt(i) && (i = i.host); zt(i) && ["html", "body"].indexOf(Wt(i)) < 0;) {
-                    var n = te(i);
-                    if (
-                        "none" !== n.transform ||
-                        "none" !== n.perspective ||
-                        "paint" === n.contain ||
-                        -1 !== ["transform", "perspective"].indexOf(n.willChange) ||
-                        (e && "filter" === n.willChange) ||
-                        (e && n.filter && "none" !== n.filter)
-                    )
-                        return i;
-                    i = i.parentNode;
-                }
-                return null;
-            })(t) ||
-            e;
+                  (function (t) {
+                      var e = /firefox/i.test(Yt());
+                      if (/Trident/i.test(Yt()) && zt(t) && "fixed" === te(t).position) return null;
+                      var i = ne(t);
+                      for (qt(i) && (i = i.host); zt(i) && ["html", "body"].indexOf(Wt(i)) < 0; ) {
+                          var n = te(i);
+                          if (
+                              "none" !== n.transform ||
+                              "none" !== n.perspective ||
+                              "paint" === n.contain ||
+                              -1 !== ["transform", "perspective"].indexOf(n.willChange) ||
+                              (e && "filter" === n.willChange) ||
+                              (e && n.filter && "none" !== n.filter)
+                          )
+                              return i;
+                          i = i.parentNode;
+                      }
+                      return null;
+                  })(t) ||
+                  e;
     }
     function re(t) {
         return ["top", "bottom"].indexOf(t) >= 0 ? "x" : "y";
@@ -1287,8 +1316,8 @@ const calendarControl = new CalendarControl();
                 c = [bt, _t].indexOf(a) >= 0 ? "height" : "width";
             if (o && r) {
                 var h = (function (t, e) {
-                    return le("number" != typeof (t = "function" == typeof t ? t(Object.assign({}, e.rects, { placement: e.placement })) : t) ? t : ce(t, yt));
-                })(s.padding, i),
+                        return le("number" != typeof (t = "function" == typeof t ? t(Object.assign({}, e.rects, { placement: e.placement })) : t) ? t : ce(t, yt));
+                    })(s.padding, i),
                     d = Jt(o),
                     u = "y" === l ? gt : bt,
                     f = "y" === l ? mt : _t,
@@ -1354,11 +1383,11 @@ const calendarControl = new CalendarControl();
             x =
                 !0 === h
                     ? (function (t) {
-                        var e = t.x,
-                            i = t.y,
-                            n = window.devicePixelRatio || 1;
-                        return { x: Xt(e * n) / n || 0, y: Xt(i * n) / n || 0 };
-                    })({ x: f, y: g })
+                          var e = t.x,
+                              i = t.y,
+                              n = window.devicePixelRatio || 1;
+                          return { x: Xt(e * n) / n || 0, y: Xt(i * n) / n || 0 };
+                      })({ x: f, y: g })
                     : { x: f, y: g };
         return (
             (f = x.x),
@@ -1393,7 +1422,7 @@ const calendarControl = new CalendarControl();
         name: "eventListeners",
         enabled: !0,
         phase: "write",
-        fn: function () { },
+        fn: function () {},
         effect: function (t) {
             var e = t.state,
                 i = t.instance,
@@ -1406,9 +1435,9 @@ const calendarControl = new CalendarControl();
                 c = [].concat(e.scrollParents.reference, e.scrollParents.popper);
             return (
                 o &&
-                c.forEach(function (t) {
-                    t.addEventListener("scroll", i.update, ge);
-                }),
+                    c.forEach(function (t) {
+                        t.addEventListener("scroll", i.update, ge);
+                    }),
                 a && l.addEventListener("resize", i.update, ge),
                 function () {
                     o &&
@@ -1466,50 +1495,50 @@ const calendarControl = new CalendarControl();
     function xe(t, e, i) {
         return e === Tt
             ? Oe(
-                (function (t, e) {
-                    var i = Bt(t),
-                        n = ie(t),
-                        s = i.visualViewport,
-                        o = n.clientWidth,
-                        r = n.clientHeight,
-                        a = 0,
-                        l = 0;
-                    if (s) {
-                        (o = s.width), (r = s.height);
-                        var c = Ut();
-                        (c || (!c && "fixed" === e)) && ((a = s.offsetLeft), (l = s.offsetTop));
-                    }
-                    return { width: o, height: r, x: a + Ae(t), y: l };
-                })(t, i)
-            )
+                  (function (t, e) {
+                      var i = Bt(t),
+                          n = ie(t),
+                          s = i.visualViewport,
+                          o = n.clientWidth,
+                          r = n.clientHeight,
+                          a = 0,
+                          l = 0;
+                      if (s) {
+                          (o = s.width), (r = s.height);
+                          var c = Ut();
+                          (c || (!c && "fixed" === e)) && ((a = s.offsetLeft), (l = s.offsetTop));
+                      }
+                      return { width: o, height: r, x: a + Ae(t), y: l };
+                  })(t, i)
+              )
             : Ft(e)
-                ? (function (t, e) {
-                    var i = Gt(t, !1, "fixed" === e);
-                    return (
-                        (i.top = i.top + t.clientTop),
-                        (i.left = i.left + t.clientLeft),
-                        (i.bottom = i.top + t.clientHeight),
-                        (i.right = i.left + t.clientWidth),
-                        (i.width = t.clientWidth),
-                        (i.height = t.clientHeight),
-                        (i.x = i.left),
-                        (i.y = i.top),
-                        i
-                    );
-                })(e, i)
-                : Oe(
-                    (function (t) {
-                        var e,
-                            i = ie(t),
-                            n = we(t),
-                            s = null == (e = t.ownerDocument) ? void 0 : e.body,
-                            o = Kt(i.scrollWidth, i.clientWidth, s ? s.scrollWidth : 0, s ? s.clientWidth : 0),
-                            r = Kt(i.scrollHeight, i.clientHeight, s ? s.scrollHeight : 0, s ? s.clientHeight : 0),
-                            a = -n.scrollLeft + Ae(t),
-                            l = -n.scrollTop;
-                        return "rtl" === te(s || i).direction && (a += Kt(i.clientWidth, s ? s.clientWidth : 0) - o), { width: o, height: r, x: a, y: l };
-                    })(ie(t))
-                );
+            ? (function (t, e) {
+                  var i = Gt(t, !1, "fixed" === e);
+                  return (
+                      (i.top = i.top + t.clientTop),
+                      (i.left = i.left + t.clientLeft),
+                      (i.bottom = i.top + t.clientHeight),
+                      (i.right = i.left + t.clientWidth),
+                      (i.width = t.clientWidth),
+                      (i.height = t.clientHeight),
+                      (i.x = i.left),
+                      (i.y = i.top),
+                      i
+                  );
+              })(e, i)
+            : Oe(
+                  (function (t) {
+                      var e,
+                          i = ie(t),
+                          n = we(t),
+                          s = null == (e = t.ownerDocument) ? void 0 : e.body,
+                          o = Kt(i.scrollWidth, i.clientWidth, s ? s.scrollWidth : 0, s ? s.clientWidth : 0),
+                          r = Kt(i.scrollHeight, i.clientHeight, s ? s.scrollHeight : 0, s ? s.clientHeight : 0),
+                          a = -n.scrollLeft + Ae(t),
+                          l = -n.scrollTop;
+                      return "rtl" === te(s || i).direction && (a += Kt(i.clientWidth, s ? s.clientWidth : 0) - o), { width: o, height: r, x: a, y: l };
+                  })(ie(t))
+              );
     }
     function ke(t) {
         var e,
@@ -1572,17 +1601,17 @@ const calendarControl = new CalendarControl();
             y = t.elements[p ? b : u],
             w = (function (t, e, i, n) {
                 var s =
-                    "clippingParents" === e
-                        ? (function (t) {
-                            var e = Ce(ne(t)),
-                                i = ["absolute", "fixed"].indexOf(te(t).position) >= 0 && zt(t) ? oe(t) : t;
-                            return Ft(i)
-                                ? e.filter(function (t) {
-                                    return Ft(t) && Zt(t, i) && "body" !== Wt(t);
-                                })
-                                : [];
-                        })(t)
-                        : [].concat(e),
+                        "clippingParents" === e
+                            ? (function (t) {
+                                  var e = Ce(ne(t)),
+                                      i = ["absolute", "fixed"].indexOf(te(t).position) >= 0 && zt(t) ? oe(t) : t;
+                                  return Ft(i)
+                                      ? e.filter(function (t) {
+                                            return Ft(t) && Zt(t, i) && "body" !== Wt(t);
+                                        })
+                                      : [];
+                              })(t)
+                            : [].concat(e),
                     o = [].concat(s, [i]),
                     r = o[0],
                     a = o.reduce(function (e, i) {
@@ -1622,8 +1651,8 @@ const calendarControl = new CalendarControl();
                 ? a
                     ? xt
                     : xt.filter(function (t) {
-                        return de(t) === h;
-                    })
+                          return de(t) === h;
+                      })
                 : yt,
             u = d.filter(function (t) {
                 return c.indexOf(t) >= 0;
@@ -1647,37 +1676,37 @@ const calendarControl = new CalendarControl();
             if (!e.modifiersData[n]._skip) {
                 for (
                     var s = i.mainAxis,
-                    o = void 0 === s || s,
-                    r = i.altAxis,
-                    a = void 0 === r || r,
-                    l = i.fallbackPlacements,
-                    c = i.padding,
-                    h = i.boundary,
-                    d = i.rootBoundary,
-                    u = i.altBoundary,
-                    f = i.flipVariations,
-                    p = void 0 === f || f,
-                    g = i.allowedAutoPlacements,
-                    m = e.options.placement,
-                    _ = Vt(m),
-                    b =
-                        l ||
-                        (_ !== m && p
-                            ? (function (t) {
-                                if (Vt(t) === vt) return [];
-                                var e = be(t);
-                                return [ye(t), e, ye(e)];
-                            })(m)
-                            : [be(m)]),
-                    v = [m].concat(b).reduce(function (t, i) {
-                        return t.concat(Vt(i) === vt ? De(e, { placement: i, boundary: h, rootBoundary: d, padding: c, flipVariations: p, allowedAutoPlacements: g }) : i);
-                    }, []),
-                    y = e.rects.reference,
-                    w = e.rects.popper,
-                    A = new Map(),
-                    E = !0,
-                    T = v[0],
-                    C = 0;
+                        o = void 0 === s || s,
+                        r = i.altAxis,
+                        a = void 0 === r || r,
+                        l = i.fallbackPlacements,
+                        c = i.padding,
+                        h = i.boundary,
+                        d = i.rootBoundary,
+                        u = i.altBoundary,
+                        f = i.flipVariations,
+                        p = void 0 === f || f,
+                        g = i.allowedAutoPlacements,
+                        m = e.options.placement,
+                        _ = Vt(m),
+                        b =
+                            l ||
+                            (_ !== m && p
+                                ? (function (t) {
+                                      if (Vt(t) === vt) return [];
+                                      var e = be(t);
+                                      return [ye(t), e, ye(e)];
+                                  })(m)
+                                : [be(m)]),
+                        v = [m].concat(b).reduce(function (t, i) {
+                            return t.concat(Vt(i) === vt ? De(e, { placement: i, boundary: h, rootBoundary: d, padding: c, flipVariations: p, allowedAutoPlacements: g }) : i);
+                        }, []),
+                        y = e.rects.reference,
+                        w = e.rects.popper,
+                        A = new Map(),
+                        E = !0,
+                        T = v[0],
+                        C = 0;
                     C < v.length;
                     C++
                 ) {
@@ -1693,10 +1722,10 @@ const calendarControl = new CalendarControl();
                         P = [];
                     if (
                         (o && P.push(S[x] <= 0),
-                            a && P.push(S[I] <= 0, S[N] <= 0),
-                            P.every(function (t) {
-                                return t;
-                            }))
+                        a && P.push(S[I] <= 0, S[N] <= 0),
+                        P.every(function (t) {
+                            return t;
+                        }))
                     ) {
                         (T = O), (E = !1);
                         break;
@@ -1706,16 +1735,16 @@ const calendarControl = new CalendarControl();
                 if (E)
                     for (
                         var j = function (t) {
-                            var e = v.find(function (e) {
-                                var i = A.get(e);
-                                if (i)
-                                    return i.slice(0, t).every(function (t) {
-                                        return t;
-                                    });
-                            });
-                            if (e) return (T = e), "break";
-                        },
-                        M = p ? 3 : 1;
+                                var e = v.find(function (e) {
+                                    var i = A.get(e);
+                                    if (i)
+                                        return i.slice(0, t).every(function (t) {
+                                            return t;
+                                        });
+                                });
+                                if (e) return (T = e), "break";
+                            },
+                            M = p ? 3 : 1;
                         M > 0 && "break" !== j(M);
                         M--
                     );
@@ -1734,26 +1763,26 @@ const calendarControl = new CalendarControl();
         });
     }
     const Pe = {
-        name: "hide",
-        enabled: !0,
-        phase: "main",
-        requiresIfExists: ["preventOverflow"],
-        fn: function (t) {
-            var e = t.state,
-                i = t.name,
-                n = e.rects.reference,
-                s = e.rects.popper,
-                o = e.modifiersData.preventOverflow,
-                r = Le(e, { elementContext: "reference" }),
-                a = Le(e, { altBoundary: !0 }),
-                l = Ie(r, n),
-                c = Ie(a, s, o),
-                h = Ne(l),
-                d = Ne(c);
-            (e.modifiersData[i] = { referenceClippingOffsets: l, popperEscapeOffsets: c, isReferenceHidden: h, hasPopperEscaped: d }),
-                (e.attributes.popper = Object.assign({}, e.attributes.popper, { "data-popper-reference-hidden": h, "data-popper-escaped": d }));
+            name: "hide",
+            enabled: !0,
+            phase: "main",
+            requiresIfExists: ["preventOverflow"],
+            fn: function (t) {
+                var e = t.state,
+                    i = t.name,
+                    n = e.rects.reference,
+                    s = e.rects.popper,
+                    o = e.modifiersData.preventOverflow,
+                    r = Le(e, { elementContext: "reference" }),
+                    a = Le(e, { altBoundary: !0 }),
+                    l = Ie(r, n),
+                    c = Ie(a, s, o),
+                    h = Ne(l),
+                    d = Ne(c);
+                (e.modifiersData[i] = { referenceClippingOffsets: l, popperEscapeOffsets: c, isReferenceHidden: h, hasPopperEscaped: d }),
+                    (e.attributes.popper = Object.assign({}, e.attributes.popper, { "data-popper-reference-hidden": h, "data-popper-escaped": d }));
+            },
         },
-    },
         je = {
             name: "offset",
             enabled: !0,
@@ -1870,9 +1899,9 @@ const calendarControl = new CalendarControl();
                             ct =
                                 f && ot
                                     ? (function (t, e, i) {
-                                        var n = ae(t, e, i);
-                                        return n > i ? i : n;
-                                    })(at, et, lt)
+                                          var n = ae(t, e, i);
+                                          return n > i ? i : n;
+                                      })(at, et, lt)
                                     : ae(f ? at : nt, et, f ? lt : st);
                         (A[w] = ct), (k[w] = ct - et);
                     }
@@ -1900,7 +1929,7 @@ const calendarControl = new CalendarControl();
             h = { x: 0, y: 0 };
         return (
             (o || (!o && !i)) &&
-            (("body" !== Wt(e) || Ee(a)) && (c = (n = e) !== Bt(n) && zt(n) ? { scrollLeft: (s = n).scrollLeft, scrollTop: s.scrollTop } : we(n)),
+                (("body" !== Wt(e) || Ee(a)) && (c = (n = e) !== Bt(n) && zt(n) ? { scrollLeft: (s = n).scrollLeft, scrollTop: s.scrollTop } : we(n)),
                 zt(e) ? (((h = Gt(e, !0)).x += e.clientLeft), (h.y += e.clientTop)) : a && (h.x = Ae(a))),
             { x: l.left + c.scrollLeft - h.x, y: l.top + c.scrollTop - h.y, width: l.width, height: l.height }
         );
@@ -1968,13 +1997,13 @@ const calendarControl = new CalendarControl();
                                 }, []);
                             })(
                                 ((r = [].concat(n, a.options.modifiers)),
-                                    (c = r.reduce(function (t, e) {
-                                        var i = t[e.name];
-                                        return (t[e.name] = i ? Object.assign({}, i, e, { options: Object.assign({}, i.options, e.options), data: Object.assign({}, i.data, e.data) }) : e), t;
-                                    }, {})),
-                                    Object.keys(c).map(function (t) {
-                                        return c[t];
-                                    }))
+                                (c = r.reduce(function (t, e) {
+                                    var i = t[e.name];
+                                    return (t[e.name] = i ? Object.assign({}, i, e, { options: Object.assign({}, i.options, e.options), data: Object.assign({}, i.data, e.data) }) : e), t;
+                                }, {})),
+                                Object.keys(c).map(function (t) {
+                                    return c[t];
+                                }))
                             );
                         return (
                             (a.orderedModifiers = u.filter(function (t) {
@@ -1987,7 +2016,7 @@ const calendarControl = new CalendarControl();
                                     s = t.effect;
                                 if ("function" == typeof s) {
                                     var o = s({ state: a, name: e, instance: h, options: n });
-                                    l.push(o || function () { });
+                                    l.push(o || function () {});
                                 }
                             }),
                             h.update()
@@ -2023,17 +2052,17 @@ const calendarControl = new CalendarControl();
                                 h.forceUpdate(), t(a);
                             });
                         }),
-                            function () {
-                                return (
-                                    r ||
+                        function () {
+                            return (
+                                r ||
                                     (r = new Promise(function (t) {
                                         Promise.resolve().then(function () {
                                             (r = void 0), t(s());
                                         });
                                     })),
-                                    r
-                                );
-                            }),
+                                r
+                            );
+                        }),
                     destroy: function () {
                         d(), (c = !0);
                     },
@@ -2057,52 +2086,52 @@ const calendarControl = new CalendarControl();
         Re = ze({ defaultModifiers: [me, Me, pe, Rt] }),
         Ve = ze({ defaultModifiers: [me, Me, pe, Rt, je, Se, He, he, Pe] });
     const Ke = Object.freeze(
-        Object.defineProperty(
-            {
-                __proto__: null,
-                popperGenerator: ze,
-                detectOverflow: Le,
-                createPopperBase: qe,
-                createPopper: Ve,
-                createPopperLite: Re,
-                top: gt,
-                bottom: mt,
-                right: _t,
-                left: bt,
-                auto: vt,
-                basePlacements: yt,
-                start: wt,
-                end: At,
-                clippingParents: Et,
-                viewport: Tt,
-                popper: Ct,
-                reference: Ot,
-                variationPlacements: xt,
-                placements: kt,
-                beforeRead: Lt,
-                read: Dt,
-                afterRead: St,
-                beforeMain: It,
-                main: Nt,
-                afterMain: Pt,
-                beforeWrite: jt,
-                write: Mt,
-                afterWrite: Ht,
-                modifierPhases: $t,
-                applyStyles: Rt,
-                arrow: he,
-                computeStyles: pe,
-                eventListeners: me,
-                flip: Se,
-                hide: Pe,
-                offset: je,
-                popperOffsets: Me,
-                preventOverflow: He,
-            },
-            Symbol.toStringTag,
-            { value: "Module" }
-        )
-    ),
+            Object.defineProperty(
+                {
+                    __proto__: null,
+                    popperGenerator: ze,
+                    detectOverflow: Le,
+                    createPopperBase: qe,
+                    createPopper: Ve,
+                    createPopperLite: Re,
+                    top: gt,
+                    bottom: mt,
+                    right: _t,
+                    left: bt,
+                    auto: vt,
+                    basePlacements: yt,
+                    start: wt,
+                    end: At,
+                    clippingParents: Et,
+                    viewport: Tt,
+                    popper: Ct,
+                    reference: Ot,
+                    variationPlacements: xt,
+                    placements: kt,
+                    beforeRead: Lt,
+                    read: Dt,
+                    afterRead: St,
+                    beforeMain: It,
+                    main: Nt,
+                    afterMain: Pt,
+                    beforeWrite: jt,
+                    write: Mt,
+                    afterWrite: Ht,
+                    modifierPhases: $t,
+                    applyStyles: Rt,
+                    arrow: he,
+                    computeStyles: pe,
+                    eventListeners: me,
+                    flip: Se,
+                    hide: Pe,
+                    offset: je,
+                    popperOffsets: Me,
+                    preventOverflow: He,
+                },
+                Symbol.toStringTag,
+                { value: "Module" }
+            )
+        ),
         Qe = "dropdown",
         Xe = "ArrowUp",
         Ye = "ArrowDown",
@@ -2337,9 +2366,9 @@ const calendarControl = new CalendarControl();
         hide(t) {
             this._config.isVisible
                 ? (this._getElement().classList.remove(mi),
-                    this._emulateAnimation(() => {
-                        this.dispose(), m(t);
-                    }))
+                  this._emulateAnimation(() => {
+                      this.dispose(), m(t);
+                  }))
                 : m(t);
         }
         dispose() {
@@ -2388,10 +2417,10 @@ const calendarControl = new CalendarControl();
         activate() {
             this._isActive ||
                 (this._config.autofocus && this._config.trapElement.focus(),
-                    P.off(document, wi),
-                    P.on(document, "focusin.bs.focustrap", (t) => this._handleFocusin(t)),
-                    P.on(document, "keydown.tab.bs.focustrap", (t) => this._handleKeydown(t)),
-                    (this._isActive = !0));
+                P.off(document, wi),
+                P.on(document, "focusin.bs.focustrap", (t) => this._handleFocusin(t)),
+                P.on(document, "keydown.tab.bs.focustrap", (t) => this._handleKeydown(t)),
+                (this._isActive = !0));
         }
         deactivate() {
             this._isActive && ((this._isActive = !1), P.off(document, wi));
@@ -2513,14 +2542,14 @@ const calendarControl = new CalendarControl();
             "hidden" === e ||
                 this._element.classList.contains(Di) ||
                 (t || (this._element.style.overflowY = "hidden"),
-                    this._element.classList.add(Di),
-                    this._queueCallback(() => {
-                        this._element.classList.remove(Di),
-                            this._queueCallback(() => {
-                                this._element.style.overflowY = e;
-                            }, this._dialog);
-                    }, this._dialog),
-                    this._element.focus());
+                this._element.classList.add(Di),
+                this._queueCallback(() => {
+                    this._element.classList.remove(Di),
+                        this._queueCallback(() => {
+                            this._element.style.overflowY = e;
+                        }, this._dialog);
+                }, this._dialog),
+                this._element.focus());
         }
         _adjustDialog() {
             const t = this._element.scrollHeight > document.documentElement.clientHeight,
@@ -2590,37 +2619,37 @@ const calendarControl = new CalendarControl();
             this._isShown ||
                 P.trigger(this._element, "show.bs.offcanvas", { relatedTarget: t }).defaultPrevented ||
                 ((this._isShown = !0),
-                    this._backdrop.show(),
-                    this._config.scroll || new gi().hide(),
-                    this._element.setAttribute("aria-modal", !0),
-                    this._element.setAttribute("role", "dialog"),
-                    this._element.classList.add(ji),
-                    this._queueCallback(
-                        () => {
-                            (this._config.scroll && !this._config.backdrop) || this._focustrap.activate(),
-                                this._element.classList.add(Pi),
-                                this._element.classList.remove(ji),
-                                P.trigger(this._element, "shown.bs.offcanvas", { relatedTarget: t });
-                        },
-                        this._element,
-                        !0
-                    ));
+                this._backdrop.show(),
+                this._config.scroll || new gi().hide(),
+                this._element.setAttribute("aria-modal", !0),
+                this._element.setAttribute("role", "dialog"),
+                this._element.classList.add(ji),
+                this._queueCallback(
+                    () => {
+                        (this._config.scroll && !this._config.backdrop) || this._focustrap.activate(),
+                            this._element.classList.add(Pi),
+                            this._element.classList.remove(ji),
+                            P.trigger(this._element, "shown.bs.offcanvas", { relatedTarget: t });
+                    },
+                    this._element,
+                    !0
+                ));
         }
         hide() {
             this._isShown &&
                 (P.trigger(this._element, "hide.bs.offcanvas").defaultPrevented ||
                     (this._focustrap.deactivate(),
-                        this._element.blur(),
-                        (this._isShown = !1),
-                        this._element.classList.add(Mi),
-                        this._backdrop.hide(),
-                        this._queueCallback(
-                            () => {
-                                this._element.classList.remove(Pi, Mi), this._element.removeAttribute("aria-modal"), this._element.removeAttribute("role"), this._config.scroll || new gi().reset(), P.trigger(this._element, Wi);
-                            },
-                            this._element,
-                            !0
-                        )));
+                    this._element.blur(),
+                    (this._isShown = !1),
+                    this._element.classList.add(Mi),
+                    this._backdrop.hide(),
+                    this._queueCallback(
+                        () => {
+                            this._element.classList.remove(Pi, Mi), this._element.removeAttribute("aria-modal"), this._element.removeAttribute("role"), this._config.scroll || new gi().reset(), P.trigger(this._element, Wi);
+                        },
+                        this._element,
+                        !0
+                    )));
         }
         dispose() {
             this._backdrop.dispose(), this._focustrap.deactivate(), super.dispose();
@@ -2634,8 +2663,8 @@ const calendarControl = new CalendarControl();
                 rootElement: this._element.parentNode,
                 clickCallback: t
                     ? () => {
-                        "static" !== this._config.backdrop ? this.hide() : P.trigger(this._element, $i);
-                    }
+                          "static" !== this._config.backdrop ? this.hide() : P.trigger(this._element, $i);
+                      }
                     : null,
             });
         }
@@ -2761,22 +2790,22 @@ const calendarControl = new CalendarControl();
         _maybeSanitize(t) {
             return this._config.sanitize
                 ? (function (t, e, i) {
-                    if (!t.length) return t;
-                    if (i && "function" == typeof i) return i(t);
-                    const n = new window.DOMParser().parseFromString(t, "text/html"),
-                        s = [].concat(...n.body.querySelectorAll("*"));
-                    for (const t of s) {
-                        const i = t.nodeName.toLowerCase();
-                        if (!Object.keys(e).includes(i)) {
-                            t.remove();
-                            continue;
-                        }
-                        const n = [].concat(...t.attributes),
-                            s = [].concat(e["*"] || [], e[i] || []);
-                        for (const e of n) Ki(e, s) || t.removeAttribute(e.nodeName);
-                    }
-                    return n.body.innerHTML;
-                })(t, this._config.allowList, this._config.sanitizeFn)
+                      if (!t.length) return t;
+                      if (i && "function" == typeof i) return i(t);
+                      const n = new window.DOMParser().parseFromString(t, "text/html"),
+                          s = [].concat(...n.body.querySelectorAll("*"));
+                      for (const t of s) {
+                          const i = t.nodeName.toLowerCase();
+                          if (!Object.keys(e).includes(i)) {
+                              t.remove();
+                              continue;
+                          }
+                          const n = [].concat(...t.attributes),
+                              s = [].concat(e["*"] || [], e[i] || []);
+                          for (const e of n) Ki(e, s) || t.removeAttribute(e.nodeName);
+                      }
+                      return n.body.innerHTML;
+                  })(t, this._config.allowList, this._config.sanitizeFn)
                 : t;
         }
         _resolvePossibleFunction(t) {
@@ -2888,9 +2917,9 @@ const calendarControl = new CalendarControl();
             const { container: n } = this._config;
             if (
                 (this._element.ownerDocument.documentElement.contains(this.tip) || (n.append(i), P.trigger(this._element, this.constructor.eventName("inserted"))),
-                    (this._popper = this._createPopper(i)),
-                    i.classList.add(tn),
-                    "ontouchstart" in document.documentElement)
+                (this._popper = this._createPopper(i)),
+                i.classList.add(tn),
+                "ontouchstart" in document.documentElement)
             )
                 for (const t of [].concat(...document.body.children)) P.on(t, "mouseover", h);
             this._queueCallback(
@@ -3025,16 +3054,16 @@ const calendarControl = new CalendarControl();
             this._isShown() || this._isHovered
                 ? (this._isHovered = !0)
                 : ((this._isHovered = !0),
-                    this._setTimeout(() => {
-                        this._isHovered && this.show();
-                    }, this._config.delay.show));
+                  this._setTimeout(() => {
+                      this._isHovered && this.show();
+                  }, this._config.delay.show));
         }
         _leave() {
             this._isWithActiveTrigger() ||
                 ((this._isHovered = !1),
-                    this._setTimeout(() => {
-                        this._isHovered || this.hide();
-                    }, this._config.delay.hide));
+                this._setTimeout(() => {
+                    this._isHovered || this.hide();
+                }, this._config.delay.hide));
         }
         _setTimeout(t, e) {
             clearTimeout(this._timeout), (this._timeout = setTimeout(t, e));
@@ -3076,13 +3105,13 @@ const calendarControl = new CalendarControl();
     }
     g(cn);
     const hn = {
-        ...cn.Default,
-        content: "",
-        offset: [0, 8],
-        placement: "right",
-        template: '<div class="popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
-        trigger: "click",
-    },
+            ...cn.Default,
+            content: "",
+            offset: [0, 8],
+            placement: "right",
+            template: '<div class="popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
+            trigger: "click",
+        },
         dn = { ...cn.DefaultType, content: "(null|string|element|function)" };
     class un extends cn {
         static get Default() {
@@ -3152,16 +3181,16 @@ const calendarControl = new CalendarControl();
         _maybeEnableSmoothScroll() {
             this._config.smoothScroll &&
                 (P.off(this._config.target, fn),
-                    P.on(this._config.target, fn, gn, (t) => {
-                        const e = this._observableSections.get(t.target.hash);
-                        if (e) {
-                            t.preventDefault();
-                            const i = this._rootElement || window,
-                                n = e.offsetTop - this._element.offsetTop;
-                            if (i.scrollTo) return void i.scrollTo({ top: n, behavior: "smooth" });
-                            i.scrollTop = n;
-                        }
-                    }));
+                P.on(this._config.target, fn, gn, (t) => {
+                    const e = this._observableSections.get(t.target.hash);
+                    if (e) {
+                        t.preventDefault();
+                        const i = this._rootElement || window,
+                            n = e.offsetTop - this._element.offsetTop;
+                        if (i.scrollTo) return void i.scrollTo({ top: n, behavior: "smooth" });
+                        i.scrollTop = n;
+                    }
+                }));
         }
         _getNewObserver() {
             const t = { root: this._rootElement, threshold: this._config.threshold, rootMargin: this._config.rootMargin };
@@ -3249,27 +3278,27 @@ const calendarControl = new CalendarControl();
         _activate(t, e) {
             t &&
                 (t.classList.add(En),
-                    this._activate(n(t)),
-                    this._queueCallback(
-                        () => {
-                            "tab" === t.getAttribute("role") ? (t.removeAttribute("tabindex"), t.setAttribute("aria-selected", !0), this._toggleDropDown(t, !0), P.trigger(t, "shown.bs.tab", { relatedTarget: e })) : t.classList.add(Cn);
-                        },
-                        t,
-                        t.classList.contains(Tn)
-                    ));
+                this._activate(n(t)),
+                this._queueCallback(
+                    () => {
+                        "tab" === t.getAttribute("role") ? (t.removeAttribute("tabindex"), t.setAttribute("aria-selected", !0), this._toggleDropDown(t, !0), P.trigger(t, "shown.bs.tab", { relatedTarget: e })) : t.classList.add(Cn);
+                    },
+                    t,
+                    t.classList.contains(Tn)
+                ));
         }
         _deactivate(t, e) {
             t &&
                 (t.classList.remove(En),
-                    t.blur(),
-                    this._deactivate(n(t)),
-                    this._queueCallback(
-                        () => {
-                            "tab" === t.getAttribute("role") ? (t.setAttribute("aria-selected", !1), t.setAttribute("tabindex", "-1"), this._toggleDropDown(t, !1), P.trigger(t, "hidden.bs.tab", { relatedTarget: e })) : t.classList.remove(Cn);
-                        },
-                        t,
-                        t.classList.contains(Tn)
-                    ));
+                t.blur(),
+                this._deactivate(n(t)),
+                this._queueCallback(
+                    () => {
+                        "tab" === t.getAttribute("role") ? (t.setAttribute("aria-selected", !1), t.setAttribute("tabindex", "-1"), this._toggleDropDown(t, !1), P.trigger(t, "hidden.bs.tab", { relatedTarget: e })) : t.classList.remove(Cn);
+                    },
+                    t,
+                    t.classList.contains(Tn)
+                ));
         }
         _keydown(t) {
             if (![vn, yn, wn, An].includes(t.key)) return;
@@ -3366,29 +3395,29 @@ const calendarControl = new CalendarControl();
         show() {
             P.trigger(this._element, "show.bs.toast").defaultPrevented ||
                 (this._clearTimeout(),
-                    this._config.animation && this._element.classList.add("fade"),
-                    this._element.classList.remove(Ln),
-                    d(this._element),
-                    this._element.classList.add(Dn, Sn),
-                    this._queueCallback(
-                        () => {
-                            this._element.classList.remove(Sn), P.trigger(this._element, "shown.bs.toast"), this._maybeScheduleHide();
-                        },
-                        this._element,
-                        this._config.animation
-                    ));
+                this._config.animation && this._element.classList.add("fade"),
+                this._element.classList.remove(Ln),
+                d(this._element),
+                this._element.classList.add(Dn, Sn),
+                this._queueCallback(
+                    () => {
+                        this._element.classList.remove(Sn), P.trigger(this._element, "shown.bs.toast"), this._maybeScheduleHide();
+                    },
+                    this._element,
+                    this._config.animation
+                ));
         }
         hide() {
             this.isShown() &&
                 (P.trigger(this._element, "hide.bs.toast").defaultPrevented ||
                     (this._element.classList.add(Sn),
-                        this._queueCallback(
-                            () => {
-                                this._element.classList.add(Ln), this._element.classList.remove(Sn, Dn), P.trigger(this._element, "hidden.bs.toast");
-                            },
-                            this._element,
-                            this._config.animation
-                        )));
+                    this._queueCallback(
+                        () => {
+                            this._element.classList.add(Ln), this._element.classList.remove(Sn, Dn), P.trigger(this._element, "hidden.bs.toast");
+                        },
+                        this._element,
+                        this._config.animation
+                    )));
         }
         dispose() {
             this._clearTimeout(), this.isShown() && this._element.classList.remove(Dn), super.dispose();
