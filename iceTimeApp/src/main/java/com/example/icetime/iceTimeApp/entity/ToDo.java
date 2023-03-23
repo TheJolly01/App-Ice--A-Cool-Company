@@ -1,5 +1,8 @@
 package com.example.icetime.iceTimeApp.entity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +27,14 @@ public class ToDo {
 
     @Column(name = "todo_description")
     private String todoDescription;
+
+    @Column(name = "endDate", nullable = true)
+    private LocalDate endDate;
+
+    @Column(name = "endTime", nullable = true)
+    @Basic
+    @Temporal(TemporalType.TIME)
+    private LocalTime endTime;
 
     @Column(name = "is_checked")
     private boolean isChecked;

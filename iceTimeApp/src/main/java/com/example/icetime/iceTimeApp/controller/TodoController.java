@@ -9,6 +9,9 @@ import jakarta.validation.Valid;
 
 import com.example.icetime.iceTimeApp.entity.ToDo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +37,7 @@ public class TodoController {
         this.todoRepository = todoRepository;
     }
 
+    // mostra tutti i todos relativi all'utente
     @GetMapping("/todos")
     public String getTodos(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         String email = userDetails.getUsername();
@@ -43,6 +47,7 @@ public class TodoController {
         return "todos/index";
     }
 
+    // reindirizza al form per la creazione di un nuovo todo
     @GetMapping("/todos/create")
     public String createTodo(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         String email = userDetails.getUsername();
@@ -53,6 +58,7 @@ public class TodoController {
         return "/todos/create";
     }
 
+    // richiesta POST per il salvataggio del nuovo todo sul db
     @PostMapping("todos/create-todo")
     public String storeTodo(@Valid @ModelAttribute("todo") ToDo formTodo, BindingResult bindingResult,
             @AuthenticationPrincipal UserDetails userDetails,
@@ -68,6 +74,7 @@ public class TodoController {
         return "redirect:/todos";
     }
 
+    // reindirizza al form per la modifica di un todo gia esistente
     @GetMapping("todos/edit/{id}")
     public String editTodo(@PathVariable("id") Long id, Model model) {
         ToDo todo = todoService.getTodoById(id);
@@ -77,7 +84,7 @@ public class TodoController {
         return "/todos/edit";
     }
 
-    // * UPDATE CRUD
+    // aggiorna il todo apportando le modifiche sul db
     @PostMapping("/todos/edit/{id}")
     public String updateTodo(@Valid @ModelAttribute("event") ToDo formTodo, BindingResult bindingResult,
             @PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails, Model model,
@@ -89,8 +96,18 @@ public class TodoController {
             return "/todos/edit";
         }
 
+        /*
+         * se l'utente spunta il todo come completato checkboxValue = 1 quindi
+         * imposto l'attributo isChecked=true
+         * imposto data e ora di completamento
+         */
         if (checkboxValue == 1) {
             formTodo.setChecked(true);
+            LocalDate localDate = LocalDate.now();
+            LocalTime localTime = LocalTime.now();
+            formTodo.setEndDate(localDate);
+            formTodo.setEndTime(localTime);
+
         } else if (checkboxValue == 2) {
             formTodo.setChecked(false);
         }
@@ -101,6 +118,7 @@ public class TodoController {
         return "redirect:/todos";
     }
 
+    // delete di un todo
     @PostMapping("todos/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         todoRepository.deleteById(id);
