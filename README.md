@@ -1,4 +1,4 @@
-![App Ice - A Cool Company](https://user-images.githubusercontent.com/86883141/225044953-cf7830eb-95bf-41e2-9aa6-2b17435b47d8.png)
+![IceTimePresentation](https://user-images.githubusercontent.com/86883141/227269810-12ca04bd-3919-41cb-946c-02e51448cf69.jpg)
 
 # ICE APP
 ## Descrizione
