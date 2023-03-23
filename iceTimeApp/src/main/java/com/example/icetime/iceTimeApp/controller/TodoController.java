@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TodoController {
@@ -79,13 +80,21 @@ public class TodoController {
     // * UPDATE CRUD
     @PostMapping("/todos/edit/{id}")
     public String updateTodo(@Valid @ModelAttribute("event") ToDo formTodo, BindingResult bindingResult,
-            @PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+            @PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails, Model model,
+            @RequestParam("todoCheck") int checkboxValue) {
         String email = userDetails.getUsername();
         User user = userService.findUserByEmail(email);
 
         if (bindingResult.hasErrors()) {
             return "/todos/edit";
         }
+
+        if (checkboxValue == 1) {
+            formTodo.setChecked(true);
+        } else if (checkboxValue == 2) {
+            formTodo.setChecked(false);
+        }
+
         formTodo.setUser(user);
         todoService.saveOrUpdate(formTodo);
 

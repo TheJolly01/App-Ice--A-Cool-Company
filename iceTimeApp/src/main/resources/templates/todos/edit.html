@@ -10,10 +10,10 @@
         href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="/style.css">
     <style>
-        #user-actions {
+        #checkbox {
             display: flex;
-            justify-content: center;
-            column-gap: 0.5rem;
+            flex-direction: column;
+            width: 35%;
         }
     </style>
 </head>
@@ -59,6 +59,21 @@
                 <label for="data"></label>
                 <input id="data-scelta" class="rounded-5" type="text" placeholder="GG-MM-AAAA" name="data"
                     th:field="*{todoDate}" required>
+
+                <!-- ^ CHECK boolean -->
+                <h6>Hai completato l'attivitá?</h6>
+                <div id="checkbox" class="form-check">
+                    <div class="d-flex align-items-center">
+                        <input name="todoCheck" class="form-check-input" type="radio" value="1" id="flexCheckDefault">
+                        <label class="form-check-label ms-2" for="flexCheckDefault">Si</label>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <input name="todoCheck" class="form-check-input" type="radio" value="2" id="flexCheckDefault"
+                            checked="checked">
+                        <label class="form-check-label ms-2" for="flexCheckDefault">No</label>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-12 text-center m-auto">

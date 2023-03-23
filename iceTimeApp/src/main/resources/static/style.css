@@ -8,14 +8,6 @@
     gap: 0.5em;
 }
 
-input[type=checkbox]:checked+label {
-    color: white;
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    font-style: oblique;
-}
-
-
 input[type="checkbox"] {
     appearance: none;
     background-color: #fff;
@@ -31,17 +23,6 @@ input[type="checkbox"] {
     place-content: center;
 }
 
-input[type="checkbox"]::before {
-    content: "";
-    width: 0.65em;
-    height: 0.65em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--bs-indigo);
-    background-color: CanvasText;
-    transform-origin: bottom left;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-}
 
 input[type="checkbox"]:checked::before {
     transform: scale(1);
