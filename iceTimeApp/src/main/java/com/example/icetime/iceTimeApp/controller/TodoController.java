@@ -9,6 +9,9 @@ import jakarta.validation.Valid;
 
 import com.example.icetime.iceTimeApp.entity.ToDo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -89,8 +92,14 @@ public class TodoController {
             return "/todos/edit";
         }
 
+        // ~ se il todo é stato completato setto data e ora di completamento
         if (checkboxValue == 1) {
             formTodo.setChecked(true);
+            LocalDate localDate = LocalDate.now();
+            LocalTime localTime = LocalTime.now();
+            formTodo.setEndDate(localDate);
+            formTodo.setEndTime(localTime);
+
         } else if (checkboxValue == 2) {
             formTodo.setChecked(false);
         }
