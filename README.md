@@ -1,6 +1,6 @@
 ![IceTimePresentation](https://user-images.githubusercontent.com/86883141/227269810-12ca04bd-3919-41cb-946c-02e51448cf69.jpg)
 
-# ICE APP
+# ICETIME
 ## Descrizione
 Un applicazione web nata per l'organizzazione della propria vita quotidiana. 
 
