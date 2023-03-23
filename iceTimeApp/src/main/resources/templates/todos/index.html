@@ -37,6 +37,7 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/team}">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/day}">Eventi</a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul><a class="btn btn-primary shadow" role="button" th:href="@{/login}">Accedi</a>
@@ -45,7 +46,10 @@
     </nav>
     <header class="bg-dark">
         <div id="page-blur" class="container pt-4 pt-xl-5">
-            <h1 class="text-center m-auto">To Do List</h1>
+            <div class="d-flex align-items-center">
+                <h1 class="text-center m-auto">To Do List</h1>
+                <a class="btn btn-primary shadow " th:href="@{/todos/create}">Aggiungi</a>
+            </div>
             <br>
             <div class="table">
                 <div class="row border-bottom text-center m-auto">
@@ -60,14 +64,11 @@
                     <div class="col-2 text-center m-auto">
                     </div>
                 </div>
-                <!-- Container singolo TODO -->
-                <div class="row border-bottom m-auto py-2" th:each="todo : ${todos}">
+                <!-- ~(todos) da completare  -->
+                <div class="row border-bottom m-auto py-2" th:each="todo : ${todos}" th:if="${todo.isChecked == false}">
                     <div class="col-5 text-left m-auto border-end">
                         <div class="todo-check-box d-flex justify-content-center align-items-center">
-                            <!-- <input type="checkbox" name="todo"> -->
                             <label th:text="${todo.todoDescription}"></label>
-                            <span id="todo-check" th:if="${todo.isChecked == true}">Completata <i
-                                    class="bi bi-check-circle"></i></span>
                         </div>
                     </div>
                     <div class="col-3 text-center m-auto border-end" th:text="${todo.todoDate}"></div>
@@ -81,13 +82,35 @@
                     </div>
 
                 </div>
-                <!-- //Todo -->
+                <!-- Fine todo -->
+                <!-- ^(todos) completati  -->
+                <div class="row my-5 pb-5">
+                    <div class="btn btn-danger col-2">Completati</div>
+                    <div class="row border-bottom m-auto py-2" th:each="todo : ${todos}"
+                        th:if="${todo.isChecked == true}">
+                        <div class="col-5 text-left m-auto border-end">
+                            <div class="todo-check-box d-flex justify-content-center align-items-center">
+                                <!-- <input type="checkbox" name="todo"> -->
+                                <label th:text="${todo.todoDescription}"></label>
+                                <span id="todo-check" th:if="${todo.isChecked == true}">Completata <i
+                                        class="bi bi-check-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-3 text-center m-auto border-end" th:text="${todo.todoDate}"></div>
+                        <div class="col-2 text-center m-auto">
+                            <a class="btn btn-primary shadow"
+                                th:href="@{'/todos/edit/{id}' (id=${todo.id})}">Modifica</a>
+                        </div>
+                        <div class="col-2 text-center m-auto">
+                            <form method="post" th:action="@{'/todos/delete/{id}' (id=${todo.id})}">
+                                <button type="submit" class="btn btn-primary shadow " role="button">Elimina</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-            <div class="row"></div>
-            <div class="col-12 text-center m-auto">
-                <a class="btn btn-primary shadow " th:href="@{/todos/create}">Aggiungi todo</a>
-            </div>
-            <div class="row"></div>
         </div>
         </div>
         <!-- Calendario -->
