@@ -28,5 +28,5 @@ Oltre che eventi potremo inserire un TO DO per segnare le cose da fare, come ad 
 - Antonio Delrio -> https://github.com/TheJolly01
 
 ### Insegnanti del corso
-- Mirko Campari
-- Vincenzo Bruno
+- Mirko Campari -> https://github.com/MaSTERmIKK
+- Vincenzo Bruno -> https://github.com/Kenzo988
