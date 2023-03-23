@@ -27,64 +27,59 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/team}">Team</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Eventi</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/todos}">Todos</a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
                 </ul><a class="btn btn-primary shadow" role="button" th:href="@{/login}">Accedi</a>
             </div>
         </div>
     </nav>
     <header class="bg-dark">
         <div id="page-blur" class="container pt-4 pt-xl-5">
-            <h1 class="text-center m-auto">Lista Eventi</h1>
+            <h1 class="text-center m-auto">To Do List</h1>
             <br>
             <div class="table">
                 <div class="row border-bottom text-center m-auto">
-                    <div class="col-2 text-center m-auto">
-                        <h3>Nome</h3>
-                    </div>
-                    <div class="col-2 text-center m-auto">
-                        <h5>Data</h5>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <h5>Inizio</h5>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <h5>Fine</h5>
-                    </div>
-                    <div class="col-4 text-center m-auto">
+                    <div class="col-5 text-center m-auto">
                         <h3>Descrizione</h3>
                     </div>
-                    <div class="col-1 text-center m-auto">
+                    <div class="col-3 text-center m-auto">
+                        <h5>Data</h5>
                     </div>
-                    <div class="col-1 text-center m-auto">
+                    <div class="col-2 text-center m-auto">
+                    </div>
+                    <div class="col-2 text-center m-auto">
                     </div>
                 </div>
-                <div class="row border-bottom text-center m-auto py-2" th:each="event : ${events}">
-                    <div class="col-2 text-center m-auto border-end"><b th:text="${event.eventTitle}"></b></div>
-                    <div class="col-2 text-center m-auto border-end" th:text="${event.eventDate}"></div>
-                    <div class="col-1 text-center m-auto border-end" th:text="${event.startTime}"></div>
-                    <div class="col-1 text-center m-auto border-end" th:text="${event.endTime}"></div>
-                    <div class="col-4 text-center m-auto border-end" th:text="${event.eventDescription}"></div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow" th:href="@{'/events/edit/{id}' (id=${event.id})}">Modifica</a>
+                <!-- Container singolo TODO -->
+                <div class="row border-bottom m-auto py-2" th:each="todo : ${todos}">
+                    <div class="col-5 text-left m-auto border-end">
+                        <div class="todo-check-box">
+                            <input type="checkbox" name="todo">
+                            <label th:text="${todo.todoDescription}">
+
+                            </label>
+                        </div>
                     </div>
-                    <div class="col-1 text-center m-auto">
-                        <form method="post" th:action="@{'/events/delete/{id}' (id=${event.id})}">
-                            <button type="submit" class="btn btn-primary shadow">Elimina</button>
+                    <div class="col-3 text-center m-auto border-end" th:text="${todo.todoDate}"></div>
+                    <div class="col-2 text-center m-auto">
+                        <a class="btn btn-primary shadow" th:href="@{'/todos/edit/{id}' (id=${todo.id})}">Modifica</a>
+                    </div>
+                    <div class="col-2 text-center m-auto">
+                        <form method="post" th:action="@{'/todos/delete/{id}' (id=${todo.id})}">
+                            <button type="submit" class="btn btn-primary shadow " role="button">Elimina</button>
                         </form>
                     </div>
 
                 </div>
+                <!-- //Todo -->
             </div>
+            <div class="row"></div>
+            <div class="col-12 text-center m-auto">
+                <a class="btn btn-primary shadow " th:href="@{/todos/create}">Aggiungi todo</a>
+            </div>
+            <div class="row"></div>
         </div>
-        <div class="row"></div>
-        <div class="col-12 text-center m-auto">
-            <a class="btn btn-primary shadow" th:href="@{/events/create}">Aggiungi evento</a>
         </div>
-        <div class="row"></div>
-        </div>
-        </div>
-
         <!-- Calendario -->
         <div id="calendarDisplay" class="calendar">
             <a class="btn" role="button" onclick="hideCalendar()">X</a>
@@ -151,10 +146,10 @@
             </div>
         </div>
     </footer>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/bold-and-dark.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bold-and-dark.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-    <script src="js/Powerful-Calendar-style.js"></script>
+    <script src="/js/Powerful-Calendar-style.js"></script>
 </body>
 
 </html>

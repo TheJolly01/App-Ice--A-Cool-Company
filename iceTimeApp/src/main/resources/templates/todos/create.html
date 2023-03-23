@@ -9,6 +9,13 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="/style.css">
+    <style>
+        #user-actions {
+            display: flex;
+            justify-content: center;
+            column-gap: 0.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,63 +34,47 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/team}">Team</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Eventi</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/todos}">Todos</a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
                 </ul><a class="btn btn-primary shadow" role="button" th:href="@{/login}">Accedi</a>
             </div>
         </div>
     </nav>
     <header class="bg-dark">
-        <div id="page-blur" class="container pt-4 pt-xl-5">
-            <h1 class="text-center m-auto">Lista Eventi</h1>
-            <br>
-            <div class="table">
-                <div class="row border-bottom text-center m-auto">
-                    <div class="col-2 text-center m-auto">
-                        <h3>Nome</h3>
-                    </div>
-                    <div class="col-2 text-center m-auto">
-                        <h5>Data</h5>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <h5>Inizio</h5>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <h5>Fine</h5>
-                    </div>
-                    <div class="col-4 text-center m-auto">
-                        <h3>Descrizione</h3>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                    </div>
-                </div>
-                <div class="row border-bottom text-center m-auto py-2" th:each="event : ${events}">
-                    <div class="col-2 text-center m-auto border-end"><b th:text="${event.eventTitle}"></b></div>
-                    <div class="col-2 text-center m-auto border-end" th:text="${event.eventDate}"></div>
-                    <div class="col-1 text-center m-auto border-end" th:text="${event.startTime}"></div>
-                    <div class="col-1 text-center m-auto border-end" th:text="${event.endTime}"></div>
-                    <div class="col-4 text-center m-auto border-end" th:text="${event.eventDescription}"></div>
-                    <div class="col-1 text-center m-auto">
-                        <a class="btn btn-primary shadow" th:href="@{'/events/edit/{id}' (id=${event.id})}">Modifica</a>
-                    </div>
-                    <div class="col-1 text-center m-auto">
-                        <form method="post" th:action="@{'/events/delete/{id}' (id=${event.id})}">
-                            <button type="submit" class="btn btn-primary shadow">Elimina</button>
-                        </form>
-                    </div>
 
+        <!-- Form per inserimento eventi -->
+        <div class="form-popup rounded-2 shadow d-flex justify-content-center" id="aggiungiEvento">
+            <form th:action="@{/todos/create-todo}" th:object="${event}" method="post" class="form-container">
+                <div class="row">
+                    <div class="col-10"></div>
                 </div>
-            </div>
+
+                <h3 class="text-center m-auto">Nuovo Elemento</h3>
+
+                <label for="descr"></label>
+                <input class="rounded-5" type="text" placeholder="Attivitá" name="descr" th:field="*{todoDescription}"
+                    required>
+
+                <label for="data"></label>
+                <input id="data-scelta" class="rounded-5" type="text" placeholder="GG-MM-AAAA" name="data"
+                    th:field="*{todoDate}" required>
+
+                <div class="row">
+                    <div class="col-12 text-center m-auto">
+                        <a class="btn btn-primary shadow " role="button" onclick="showCalendar()">Seleziona data</a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-12 text-center m-auto">
+                        <button type="submit" class="btn btn-primary shadow " role="button">Aggiungi</button>
+                    </div>
+                </div>
+                <br>
+            </form>
         </div>
-        <div class="row"></div>
-        <div class="col-12 text-center m-auto">
-            <a class="btn btn-primary shadow" th:href="@{/events/create}">Aggiungi evento</a>
-        </div>
-        <div class="row"></div>
-        </div>
-        </div>
+        <!-- Fino a qui -->
+
 
         <!-- Calendario -->
         <div id="calendarDisplay" class="calendar">
@@ -127,7 +118,7 @@
             </div>
             <hr>
             <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2023 IceTime</p>
+                <p class="mb-0">Copyright Â© 2023 IceTime</p>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                             fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
@@ -151,10 +142,10 @@
             </div>
         </div>
     </footer>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/bold-and-dark.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bold-and-dark.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-    <script src="js/Powerful-Calendar-style.js"></script>
+    <script src="/js/Powerful-Calendar-style.js"></script>
 </body>
 
 </html>
