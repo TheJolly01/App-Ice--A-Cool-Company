@@ -10,19 +10,7 @@
         href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/style.css">
-    <style>
-        #todo-check {
-            display: inline-block;
-            background-color: #6610f2;
-            padding: 0.35rem;
-            border-radius: 0.5rem;
-        }
-
-        .bi-check-circle-fill {
-            font-size: 1.3rem;
-            color: #198754;
-        }
-    </style>
+    <link rel="stylesheet" href="/todos.css">
 </head>
 
 <body>
@@ -51,6 +39,11 @@
     <header class="bg-dark">
         <div id="page-blur" class="container pt-4 pt-xl-5">
             <div class="d-flex align-items-center">
+                <div class="btn btn-danger col-2 shadow d-flex align-items-center">
+                    <span class="mx-3">In corso</span>
+                    <!-- ^spinner -->
+                    <span id="spinner" class="spinner-border" role="status"></span>
+                </div>
                 <h1 class="text-center m-auto">To Do List</h1>
                 <a class="btn btn-primary shadow " th:href="@{/todos/create}">Aggiungi</a>
             </div>
@@ -89,14 +82,14 @@
                 <!-- Fine todo -->
                 <!-- ^(todos) completati  -->
                 <div class="row my-5 pb-5">
-                    <div class="btn btn-danger col-2"> Attivitá Completate</div>
+                    <div id="comleted-todos" class="btn col-2 shadow">Completate</div>
                     <div class="row border-bottom m-auto py-2" th:each="todo : ${todos}"
                         th:if="${todo.isChecked == true}">
                         <div class="col-5 text-left m-auto border-end">
                             <div class="todo-check-box d-flex justify-content-between align-items-center">
                                 <i class="bi bi-check-circle-fill"></i>
                                 <label th:text="${todo.todoDescription}"></label>
-                                <span id="todo-check" th:if="${todo.isChecked == true}">
+                                <span id="todo-check" th:if="${todo.isChecked == true}" class="shadow">
                                     <span th:text="${todo.endDate}"></span>
                                     <span>||</span>
                                     <span th:text="${todo.endTime}"></span>
