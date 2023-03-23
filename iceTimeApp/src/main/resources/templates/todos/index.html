@@ -13,10 +13,14 @@
     <style>
         #todo-check {
             display: inline-block;
-            border: 1px solid #198754;
-            background-color: #198754;
+            background-color: #6610f2;
             padding: 0.35rem;
             border-radius: 0.5rem;
+        }
+
+        .bi-check-circle-fill {
+            font-size: 1.3rem;
+            color: #198754;
         }
     </style>
 </head>
@@ -85,15 +89,18 @@
                 <!-- Fine todo -->
                 <!-- ^(todos) completati  -->
                 <div class="row my-5 pb-5">
-                    <div class="btn btn-danger col-2">Completati</div>
+                    <div class="btn btn-danger col-2"> Attivitá Completate</div>
                     <div class="row border-bottom m-auto py-2" th:each="todo : ${todos}"
                         th:if="${todo.isChecked == true}">
                         <div class="col-5 text-left m-auto border-end">
-                            <div class="todo-check-box d-flex justify-content-center align-items-center">
-                                <!-- <input type="checkbox" name="todo"> -->
+                            <div class="todo-check-box d-flex justify-content-between align-items-center">
+                                <i class="bi bi-check-circle-fill"></i>
                                 <label th:text="${todo.todoDescription}"></label>
-                                <span id="todo-check" th:if="${todo.isChecked == true}">Completata <i
-                                        class="bi bi-check-circle"></i></span>
+                                <span id="todo-check" th:if="${todo.isChecked == true}">
+                                    <span th:text="${todo.endDate}"></span>
+                                    <span>||</span>
+                                    <span th:text="${todo.endTime}"></span>
+                                </span>
                             </div>
                         </div>
                         <div class="col-3 text-center m-auto border-end" th:text="${todo.todoDate}"></div>
