@@ -9,6 +9,13 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="/style.css">
+    <style>
+        #user-actions {
+            display: flex;
+            justify-content: center;
+            column-gap: 0.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,64 +41,23 @@
         </div>
     </nav>
     <header class="bg-dark">
-        <div id="page-blur" class="container pt-4 pt-xl-5">
-            <h1 class="text-center m-auto">To Do List</h1>
-            <br>
-            <div class="table">
-                <div class="row border-bottom text-center m-auto">
-                    <div class="col-5 text-center m-auto">
-                        <h3>Descrizione</h3>
-                    </div>
-                    <div class="col-3 text-center m-auto">
-                        <h5>Data</h5>
-                    </div>
-                    <div class="col-2 text-center m-auto">
-                    </div>
-                    <div class="col-2 text-center m-auto">
-                    </div>
-                </div>
-                <!-- Container singolo TODO -->
-                <div class="row border-bottom m-auto py-2" th:each="todo : ${todos}">
-                    <div class="col-5 text-left m-auto border-end">
-                        <div class="todo-check-box">
-                            <input type="checkbox" name="todo">
-                            <label th:text="${todo.todoDescription}">
 
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-3 text-center m-auto border-end" th:text="${todo.todoDate}"></div>
-                    <div class="col-2 text-center m-auto"><a class="btn btn-primary shadow " role="button"
-                            onclick="openFormModifica()">Modifica</a></div>
-                    <div class="col-2 text-center m-auto"><a class="btn btn-primary shadow " role="button">Elimina</a>
-                    </div>
-                </div>
-                <!-- -->
-            </div>
-            <div class="row"></div>
-            <div class="col-12 text-center m-auto">
-                <a class="btn btn-primary shadow " th:href="@{/todos/create}">Aggiungi todo</a>
-            </div>
-            <div class="row"></div>
-        </div>
-        </div>
-
-        <!-- Form per modifica eventi -->
-        <div class="form-popup rounded-2 shadow" id="modificaEvento">
-            <form action="/action_page.php" class="form-container">
+        <!-- Form per inserimento eventi -->
+        <div class="form-popup rounded-2 shadow d-flex justify-content-center" id="aggiungiEvento">
+            <form th:action="@{/todos/create-todo}" th:object="${event}" method="post" class="form-container">
                 <div class="row">
                     <div class="col-10"></div>
-                    <div class="col-2"><a class=" close-popup" role="button" onclick="closeFormModifica()">X</a></div>
                 </div>
 
-                <h3 class="text-center m-auto">Modifica</h3>
+                <h3 class="text-center m-auto">Nuovo Elemento</h3>
 
                 <label for="descr"></label>
-                <input class="rounded-5" type="text" placeholder="Descrizione" name="descr" required>
+                <input class="rounded-5" type="text" placeholder="Attivitá" name="descr" th:field="*{todoDescription}"
+                    required>
 
                 <label for="data"></label>
-                <input id="data-scelta-modifica" class="rounded-5" type="text" placeholder="GG-MES-AAAA" name="data"
-                    required>
+                <input id="data-scelta" class="rounded-5" type="text" placeholder="GG-MM-AAAA" name="data"
+                    th:field="*{todoDate}" required>
 
                 <div class="row">
                     <div class="col-12 text-center m-auto">
@@ -101,7 +67,7 @@
                 <br>
                 <div class="row">
                     <div class="col-12 text-center m-auto">
-                        <button type="submit" class="btn btn-primary shadow " role="button">Modifica</button>
+                        <button type="submit" class="btn btn-primary shadow " role="button">Aggiungi</button>
                     </div>
                 </div>
                 <br>
@@ -152,7 +118,7 @@
             </div>
             <hr>
             <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2023 IceTime</p>
+                <p class="mb-0">Copyright Â© 2023 IceTime</p>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                             fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
