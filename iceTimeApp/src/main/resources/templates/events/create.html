@@ -98,14 +98,16 @@
 
                         <label for="startTime">Inizio:</label>
                         <br>
-                        <input class="form-ore rounded-5" type="text" id="startTime" th:field="*{startTime}">
+                        <input class="form-ore rounded-5" type="number" min="0" max="24" id="startTime"
+                            th:field="*{startTime}">
 
                     </div>
                     <div class="col-2">
 
                         <label for="endTime">Fine:</label>
                         <br>
-                        <input class="form-ore rounded-5" type="text" id="endTime" th:field="*{endTime}">
+                        <input class="form-ore rounded-5" type="number" min="0" max="24" id="endTime"
+                            th:field="*{endTime}">
 
                     </div>
                     <div class="col-4"></div>
