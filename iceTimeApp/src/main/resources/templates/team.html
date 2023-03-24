@@ -28,9 +28,15 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="#">Team</a></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                </ul><a class="btn btn-primary shadow" role="button" th:href="@{/login}">Accedi</a>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/day}">Eventi</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/todos}">Todos</a></li>
+                </ul>
+                <a sec:authorize="!isAuthenticated()" class="btn btn-primary shadow mx-3" role="button"
+                    th:href="@{/login}">Accedi</a>
+                <a sec:authorize="!isAuthenticated()" class="btn btn-primary shadow" role="button"
+                    th:href="@{/register}">Registrati</a>
+                <a sec:authorize="isAuthenticated()" class="btn btn-primary shadow" role="button"
+                    th:href="@{/logout}">Logout</a>
             </div>
         </div>
     </nav>
