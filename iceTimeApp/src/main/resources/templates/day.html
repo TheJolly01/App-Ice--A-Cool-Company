@@ -8,7 +8,7 @@
     <meta name="description" content="Tieni traccia del tempo che hai!">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -29,7 +29,8 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/team}">Team</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Eventi</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/todos}">Todos</a></li>
-                </ul><a class="btn btn-primary shadow" role="button" th:href="@{/login}">Accedi</a>
+                </ul><a class="btn btn-primary shadow" role="button" th:href="@{/logout}">Logout</a>
+                <a href="#" th:text="${user.name}"></a>
             </div>
         </div>
     </nav>
@@ -87,7 +88,7 @@
 
         <!-- Calendario -->
         <div id="calendarDisplay" class="calendar">
-            <a class="btn" role="button" onclick="hideCalendar()">X</a>
+            <a class="btn" role="button">X</a>
         </div>
         <!-- Fino a qui -->
     </header>
