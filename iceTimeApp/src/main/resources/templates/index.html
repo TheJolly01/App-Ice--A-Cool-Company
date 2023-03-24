@@ -34,8 +34,12 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
-                <a class="btn btn-primary shadow mx-3" role="button" th:href="@{/login}">Accedi</a>
-                <a class="btn btn-primary shadow" role="button" th:href="@{/register}">Registrati</a>
+                <a sec:authorize="!isAuthenticated()" class="btn btn-primary shadow mx-3" role="button"
+                    th:href="@{/login}">Accedi</a>
+                <a sec:authorize="!isAuthenticated()" class="btn btn-primary shadow" role="button"
+                    th:href="@{/register}">Registrati</a>
+                <a sec:authorize="isAuthenticated()" class="btn btn-primary shadow" role="button"
+                    th:href="@{/logout}">Logout</a>
             </div>
         </div>
     </nav>
