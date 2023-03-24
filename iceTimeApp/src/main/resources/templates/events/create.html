@@ -69,7 +69,7 @@
                     <div class="col-6">
                         <label for="event"></label>
                         <input class="rounded-5" type="text" placeholder="Evento" name="event" th:field="*{eventTitle}"
-                            required>
+                            required maxlength="30">
                     </div>
                     <div class="col-3"></div>
                 </div>
@@ -78,7 +78,7 @@
                     <div class="col-6">
                         <label for="descr"></label>
                         <input class="rounded-5" type="text" placeholder="Descrizione" name="descr"
-                            th:field="*{eventDescription}" required>
+                            th:field="*{eventDescription}" required maxlength="100">
                     </div>
                     <div class="col-3"></div>
                 </div>
