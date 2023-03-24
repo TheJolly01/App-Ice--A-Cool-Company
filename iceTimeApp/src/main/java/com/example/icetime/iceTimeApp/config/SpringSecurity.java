@@ -29,14 +29,21 @@ public class SpringSecurity {
                 http.csrf().disable()
                                 .authorizeHttpRequests(
                                                 (authorize) -> authorize.requestMatchers("/register/**").permitAll()
-                                                                .requestMatchers("/index").permitAll()
-                                                                .requestMatchers("/calendar").permitAll()
-                                                                .requestMatchers("/**").permitAll())
+                                                                .requestMatchers("/").permitAll()
+                                                                .requestMatchers("/team").permitAll()
+                                                                .requestMatchers("/error").permitAll()
+                                                                .requestMatchers("/resources/**", "/static/**",
+                                                                                "/css/**", "/img/**",
+                                                                                "/js/**")
+                                                                .permitAll()
+                                                                .requestMatchers("/day/**").authenticated()
+                                                                .requestMatchers("/events/**").permitAll()
+                                                                .requestMatchers("/todos/**").permitAll())
                                 .formLogin(
                                                 form -> form
                                                                 .loginPage("/login")
                                                                 .loginProcessingUrl("/login")
-                                                                .defaultSuccessUrl("/day")
+                                                                .defaultSuccessUrl("/day", true)
                                                                 .permitAll())
                                 .logout(
                                                 logout -> logout
