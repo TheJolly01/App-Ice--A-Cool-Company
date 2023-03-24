@@ -29,7 +29,8 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/team}">Team</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Eventi</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/todos}">Todos</a></li>
-                </ul><a class="btn btn-primary shadow" role="button" th:href="@{/login}">Accedi</a>
+                </ul><a class="btn btn-primary shadow" role="button" th:href="@{/logout}">Logout</a>
+                <a href="#" th:text="${user.name}"></a>
             </div>
         </div>
     </nav>
