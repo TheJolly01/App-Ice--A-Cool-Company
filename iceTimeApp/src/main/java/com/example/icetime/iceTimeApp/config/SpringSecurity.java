@@ -38,7 +38,7 @@ public class SpringSecurity {
                                                                 .permitAll()
                                                                 .requestMatchers("/day/**").authenticated()
                                                                 .requestMatchers("/events/**").permitAll()
-                                                                .requestMatchers("/todos/**").permitAll())
+                                                                .requestMatchers("/todos/**").authenticated())
                                 .formLogin(
                                                 form -> form
                                                                 .loginPage("/login")

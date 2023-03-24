@@ -13419,3 +13419,12 @@ footer ul li a {
         transform: rotate(-6deg);
     }
 }
+
+.nc-dropdown-item {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.nc-dropdown-item:hover {
+    background-color: #fff;
+}

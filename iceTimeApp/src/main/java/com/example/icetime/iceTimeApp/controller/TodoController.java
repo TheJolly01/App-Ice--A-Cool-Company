@@ -76,7 +76,11 @@ public class TodoController {
 
     // reindirizza al form per la modifica di un todo gia esistente
     @GetMapping("todos/edit/{id}")
-    public String editTodo(@PathVariable("id") Long id, Model model) {
+    public String editTodo(@PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String email = userDetails.getUsername();
+        User user = userService.findUserByEmail(email);
+        model.addAttribute("user", user);
+
         ToDo todo = todoService.getTodoById(id);
         Long todoId = todo.getId();
         model.addAttribute("todoId", todoId);

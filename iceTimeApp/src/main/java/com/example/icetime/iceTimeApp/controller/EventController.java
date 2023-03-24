@@ -58,7 +58,7 @@ public class EventController {
             Model model) {
         String email = userDetails.getUsername();
         User user = userService.findUserByEmail(email);
-
+        model.addAttribute("user", user);
         if (bindingResult.hasErrors()) {
             return "/events/create";
         }
@@ -71,9 +71,12 @@ public class EventController {
 
     // * GET per il form di modifica
     @GetMapping("/events/edit/{id}")
-    public String edit(@PathVariable("id") Long id, Model model) {
+    public String edit(@PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails, Model model) {
         Event event1 = eventService.getEventById(id);
         Long eventId = event1.getId();
+        String email = userDetails.getUsername();
+        User user = userService.findUserByEmail(email);
+        model.addAttribute("user", user);
         model.addAttribute("eventId", eventId);
         model.addAttribute("event", eventRepository.findById(id));
         return "/events/edit";
