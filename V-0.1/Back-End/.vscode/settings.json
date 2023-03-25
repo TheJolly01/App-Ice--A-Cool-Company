@@ -1,7 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Users\\Megaport\\Desktop\\Script Java\\Fibonacci\\Drive\\mysql-connector-j-8.0.32.jar",
-        "jcalendar-1.4.jar"
-    ]
-}
