@@ -1,0 +1,21 @@
+#todo-check {
+    display: inline-block;
+    background-color: #6610f2;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+#comleted-todos {
+    background-color: #198754;
+}
+
+.bi-check-circle-fill {
+    font-size: 1.3rem;
+    color: #198754;
+}
+
+#spinner {
+    width: 22px;
+    height: 22px;
+    font-size: 0.8rem;
+}
