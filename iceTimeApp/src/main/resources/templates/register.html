@@ -54,18 +54,18 @@
                                 </svg></div>
                             <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
                                 <div class="mb-3"><input class="form-control" type="name" id="firstName"
-                                        name="firstName" th:field="*{firstName}" placeholder="Nome"></div>
+                                        name="firstName" th:field="*{firstName}" placeholder="Nome" required></div>
                                 <p th:errors="*{firstName}" class="text-danger"
                                     th:if="${#fields.hasErrors('firstName')}"></p>
                                 <div class="mb-3"><input class="form-control" type="surname" id="lastName"
-                                        name="lastName" th:field="*{lastName}" placeholder="Cognome"></div>
+                                        name="lastName" th:field="*{lastName}" placeholder="Cognome" required></div>
                                 <p th:errors="*{lastName}" class="text-danger" th:if="${#fields.hasErrors('lastName')}">
                                 </p>
                                 <div class="mb-3"><input class="form-control" type="email" id="email" name="email"
-                                        th:field="*{email}" placeholder="Indirizzo e-mail"></div>
+                                        th:field="*{email}" placeholder="Indirizzo e-mail" required></div>
                                 <p th:errors="*{email}" class="text-danger" th:if="${#fields.hasErrors('email')}"></p>
                                 <div class="mb-3"><input class="form-control" type="password" id="password"
-                                        name="password" th:field="*{password}" placeholder="Password"></div>
+                                        name="password" th:field="*{password}" placeholder="Password" required></div>
                                 <p th:errors="*{password}" class="text-danger" th:if="${#fields.hasErrors('password')}">
                                 </p>
                                 <div class="mb-3"><button class="btn btn-primary shadow d-block w-100"
